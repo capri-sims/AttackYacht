@@ -8,17 +8,15 @@
         android:text="Connect"
         android:id="@+id/button_connect"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickConnect" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView_connect"
-        android:layout_alignParentStart="false"
         android:choiceMode="singleChoice"
         android:clickable="false"
         android:contextClickable="false"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/button_connect" />
 </RelativeLayout>

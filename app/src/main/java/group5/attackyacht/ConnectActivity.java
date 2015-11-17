@@ -2,6 +2,7 @@ package group5.attackyacht;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class ConnectActivity extends AppCompatActivity {
 
@@ -9,5 +10,10 @@ public class ConnectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
+    }
+
+    public void onClickConnect(View v){
+
+
     }
 }
