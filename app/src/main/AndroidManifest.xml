@@ -24,6 +24,23 @@
             android:name=".OptionsActivity"
             android:label="@string/title_activity_options" >
         </activity>
+        <activity android:name=".SetupActivity" >
+        </activity>
+        <activity android:name=".GameplayActivity" >
+        </activity>
+        <activity android:name=".GameOverActivity" >
+        </activity>
+
+        <service
+            android:name=".BluetoothService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".MusicService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
