@@ -2,45 +2,78 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="group5.attackyacht" >
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ConnectActivity"
             android:screenOrientation="landscape" >
-        </activity>
-        <activity
-            android:name=".OptionsActivity"
-            android:label="@string/title_activity_options" >
-        </activity>
-        <activity android:name=".SetupActivity" >
-        </activity>
-        <activity android:name=".GameplayActivity" >
-        </activity>
-        <activity android:name=".GameOverActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
-        <service
-            android:name=".BluetoothService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
+        <activity
+            android:name=".OptionsActivity"
+            android:label="@string/title_activity_options"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SetupActivity"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".GameplayActivity"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".GameOverActivity"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--<service-->
+            <!--android:name=".BluetoothService"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true" >-->
+        <!--</service>-->
+
         <service
             android:name=".MusicService"
             android:enabled="true"
             android:exported="true" >
         </service>
+
     </application>
 
 </manifest>

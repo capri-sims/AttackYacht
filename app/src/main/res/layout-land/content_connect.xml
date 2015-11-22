@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/listView_connect"
         android:choiceMode="singleChoice"
-        android:clickable="false"
         android:contextClickable="false"
         android:layout_above="@+id/button_connect" />
 </RelativeLayout>

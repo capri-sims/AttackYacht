@@ -7,44 +7,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Attack Yacht!"
-        android:id="@+id/textView"
-        android:layout_marginRight="95dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginTop="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+    android:background="@drawable/menuart">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Two Player"
         android:id="@+id/button_menu_twoPlayer"
-        android:layout_below="@+id/textView"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:onClick="onClickTwoPlayer"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp"
-        android:onClick="onClickTwoPlayer" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Options"
         android:id="@+id/button_menu_options"
-        android:layout_marginTop="31dp"
         android:onClick="onClickOptions"
         android:layout_below="@+id/button_menu_twoPlayer"
-        android:layout_alignLeft="@+id/button_menu_twoPlayer"
-        android:layout_alignStart="@+id/button_menu_twoPlayer"
         android:layout_alignRight="@+id/button_menu_twoPlayer"
-        android:layout_alignEnd="@+id/button_menu_twoPlayer" />
+        android:layout_alignEnd="@+id/button_menu_twoPlayer"
+        android:layout_marginTop="26dp"
+        android:layout_alignLeft="@+id/button_menu_twoPlayer"
+        android:layout_alignStart="@+id/button_menu_twoPlayer" />
 
 </RelativeLayout>
