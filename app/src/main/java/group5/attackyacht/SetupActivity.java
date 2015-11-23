@@ -37,13 +37,17 @@ public class SetupActivity extends AppCompatActivity {
                         int row = Integer.parseInt((String.valueOf(v.getId())).substring(0, 0)); //i
                         int col = Integer.parseInt((String.valueOf(v.getId())).substring(1)); //j
 
-                        if(drawable.getColor() == Color.BLUE){
+                        //ImageView im = (ImageView) v;
+
+                        if(friendlyWaters[row][col].getType().equalsIgnoreCase("water")){
                             v.setBackgroundColor(Color.GRAY); //TODO: change to images...
-                            friendlyWaters[row][col].setType("ship");
+                            //im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_one)); //???
+                            friendlyWaters[row][col].setType("ship_one");
 
                         }
                         else{
                             v.setBackgroundColor(Color.BLUE);
+                            //im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.water)); //???
                             friendlyWaters[row][col].setType("water");
                         }
                     }
