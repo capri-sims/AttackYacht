@@ -13,6 +13,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //NOT WORKING
+//        Intent music = new Intent(this, MusicService.class);
+//        startService(music);
+
         //BUTTONS//
         Button buttonTwoPlayer = (Button) findViewById(R.id.button_menu_twoPlayer);
         buttonTwoPlayer.setOnClickListener(new View.OnClickListener() {
