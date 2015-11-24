@@ -20,12 +20,13 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        //TODO: Change table to 7 * 12 ??? for better formatting on a phone
         TableLayout table = (TableLayout) findViewById(R.id.shipSetupGrid);
         for (int i = 0; i < 10; i++){
             TableRow row = new TableRow(this);
             for (int j = 0; j < 10; j++){
                 ImageView image = new ImageView (this);
-                friendlyWaters[i][j] = new Ship("water");
+                //friendlyWaters[i][j] = new Ship("water"); //TODO: Fix this... Why isn't this working!!!???? - Have it work with friendlyWaters
                 //image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.water));
                 image.setBackgroundColor(Color.BLUE);
                 //image.setPadding(0, 0, 0, 0); //padding in each image if needed
@@ -34,21 +35,21 @@ public class SetupActivity extends AppCompatActivity {
                 image.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         ColorDrawable drawable = (ColorDrawable) v.getBackground();
-                        int row = Integer.parseInt((String.valueOf(v.getId())).substring(0, 0)); //i
-                        int col = Integer.parseInt((String.valueOf(v.getId())).substring(1)); //j
+                        //int row = Integer.parseInt((String.valueOf(v.getId())).substring(0, 0)); //i
+                        //int col = Integer.parseInt((String.valueOf(v.getId())).substring(1)); //j
 
                         //ImageView im = (ImageView) v;
 
-                        if(friendlyWaters[row][col].getType().equalsIgnoreCase("water")){
+                        //if(friendlyWaters[row][col].getType().equalsIgnoreCase("water")){ //problem line? no
+                        if (drawable.getColor() == Color.BLUE) {
                             v.setBackgroundColor(Color.GRAY); //TODO: change to images...
                             //im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_one)); //???
-                            friendlyWaters[row][col].setType("ship_one");
+                            //friendlyWaters[row][col].setType("ship_one");
 
-                        }
-                        else{
+                        } else {
                             v.setBackgroundColor(Color.BLUE);
                             //im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.water)); //???
-                            friendlyWaters[row][col].setType("water");
+                            // friendlyWaters[row][col].setType("water");
                         }
                     }
                 });
