@@ -166,46 +166,47 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         // I set 1 to null as if something went wrong, I'd rather it not tell
         // a player they won / lost if they did not
         Boolean [] endStatus = new Boolean [] {true, null};
-
-        // Traverse enemyWaters to check if the player won
-        for (int indexY1 = 0; indexY1 < enemyWaters.length; indexY1++)
-        {
-            for (int indexX1 = 0; indexX1 < enemyWaters [indexY1].length; indexX1++)
-            {
-                // If any health count is greater than 0, the game continues
-                if (enemyWaters [indexY1][indexX1].health > 0)
-                {
-                    endStatus [0] = false;
-                }
-            }
-        }
-        // If the game ended now, the player has won
-        if (endStatus [0] == true)
-        {
-            endStatus [1] = true;
-        }
-        // If player did not win, check if they lost
-        else
-        {
+//
+//        // Traverse enemyWaters to check if the player won
+//        for (int indexY1 = 0; indexY1 < enemyWaters.length; indexY1++)
+//        {
+//            for (int indexX1 = 0; indexX1 < enemyWaters [indexY1].length; indexX1++)
+//            {
+//                // If any health count is greater than 0, the game continues
+//                if (enemyWaters [indexY1][indexX1].health > 0)
+//                {
+//                    endStatus [0] = false;
+//                }
+//            }
+//        }
+//        // If the game ended now, the player has won
+//        if (endStatus [0] == true)
+//        {
+//            endStatus [1] = true;
+//        }
+//        // If player did not win, check if they lost
+//        else
+//        {
             // Traverse friendlyWaters to check if player lost
-            for (int indexY2 = 0; indexY2 < friendlyWaters.length; indexY2++)
-            {
-                for (int indexX2 = 0; indexX2 < friendlyWaters [indexY2].length; indexX2++)
-                {
-                    // If any health count is greater than 0, the game continues
-                    if (enemyWaters [indexY2][indexX2].health > 0)
-                    {
-                        endStatus [0] = false;
-                    }
-                }
-            }
-            // If the game ended now, the player has lost
-            if (endStatus [0] == true)
-            {
-                endStatus [1] = false;
-            }
-        }
-
+//            for (int indexY2 = 0; indexY2 < friendlyWaters.length; indexY2++)
+//            {
+//                for (int indexX2 = 0; indexX2 < friendlyWaters [indexY2].length; indexX2++)
+//                {
+//                    // If any health count is greater than 0, the game continues
+//                    if (enemyWaters [indexY2][indexX2].health > 0)
+//                    {
+//                        endStatus [0] = false;
+//                    }
+//                }
+//            }
+//            // If the game ended now, the player has lost
+//            if (endStatus [0] == true)
+//            {
+//                endStatus [1] = false;
+//            }
+//        }
+//
+//        return endStatus;
+//    }
         return endStatus;
-    }
-}
+}}

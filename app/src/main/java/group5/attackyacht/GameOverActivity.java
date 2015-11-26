@@ -12,4 +12,5 @@ public class GameOverActivity extends AppCompatActivity {
 
         //three buttons
     }
+
 }

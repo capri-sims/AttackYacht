@@ -9,11 +9,15 @@ public class Ship {
     //Valid types: water, destroyed, ship_bottom, ship_top, ship_middle_h, ship_middle_v, ship_left, ship_right
     private int health;
     private boolean hit;
+    private int row;
+    private int col;
 
-    public Ship(String type){
+    public Ship(String type, int row, int col){
         this.type = type;
         health = 100;
         hit = false;
+        this.row = row;
+        this.col = col;
     }
 
     public boolean hit(){
@@ -36,5 +40,9 @@ public class Ship {
     public String getType(){
         return type;
     }
+
+    public int getRow(){ return row; }
+
+    public int getCol(){ return col; }
 
 }
