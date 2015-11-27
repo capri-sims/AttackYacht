@@ -1,16 +1,19 @@
 package group5.attackyacht;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 public class SetupActivity extends AppCompatActivity {
 
@@ -23,7 +26,6 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-        //TODO: Change table to 7 * 12 ??? for better formatting on a phone
         TableLayout table = (TableLayout) findViewById(R.id.shipSetupGrid);
         for (int i = 0; i < ROW; i++){
             TableRow row = new TableRow(this);
@@ -32,12 +34,9 @@ public class SetupActivity extends AppCompatActivity {
                 friendlyWaters[i][j] = new Ship("water", i, j);
                 image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.water));
                 //image.setBackgroundColor(Color.BLUE);
-                //image.setPadding(0, 0, 0, 0); //padding in each image if needed
                 image.setId(i + j);
-                //add here on click event etc for each image...
-                image.setOnClickListener(onClick(image, i, j));
-                //...
                 row.addView(image, 100, 100);
+                image.setOnClickListener(onClick(image, i, j));
             }
             table.addView(row);
         }
@@ -55,32 +54,78 @@ public class SetupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     View.OnClickListener onClick(final ImageView im, final int row, final int col)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 //ColorDrawable drawable = (ColorDrawable) v.getBackground();
-                //int row = Integer.parseInt((String.valueOf(v.getId())).substring(0, 1)); //i
-                //int col = Integer.parseInt((String.valueOf(v.getId())).substring(1)); //j
 
-
-                //ImageView im = (ImageView) findViewById(v.getId());
                 ImageView im = (ImageView) v;
 
                 String type = (friendlyWaters[row][col]).getType();
+                String left, right, above, below;
 
-                if(type.equalsIgnoreCase("water")){ //problem line? no
+                if(type.equalsIgnoreCase("water")){
                     //if (drawable.getColor() == Color.BLUE) {
-                    //v.setBackgroundColor(Color.GRAY); //TODO: change to images...
-                    im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_one)); //??? NOT WORKING
-                    //friendlyWaters[row][col].setType("ship_one");
+                    //v.setBackgroundColor(Color.GRAY);
 
-                } else {
+                    if(row != 0){ below = (friendlyWaters[row - 1][col]).getType(); }
+                    else{ below = "water"; }
+
+                    if(row != ROW-1){ above = (friendlyWaters[row + 1][col]).getType(); }
+                    else{ above = "water"; }
+
+                    if(col != 0){ left = (friendlyWaters[row][col - 1]).getType(); }
+                    else{ left = "water"; }
+
+                    if(col != COL-1){ right = (friendlyWaters[row][col + 1]).getType(); }
+                    else{ right = "water"; }
+
+                    boolean b = false, a = false, l = false, r = false;
+
+                    if(!(below.equalsIgnoreCase("water"))){
+                        friendlyWaters[row-1][col].setType("ship_top");
+                        friendlyWaters[row][col].setType("ship_bottom");
+                        b = true;
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_bottom));
+                    }
+                    if(!(above.equalsIgnoreCase("water"))){
+                        friendlyWaters[row+1][col].setType("ship_bottom");
+                        friendlyWaters[row][col].setType("ship_top");
+                        a = true;
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_top));
+                    }
+                    if(!(left.equalsIgnoreCase("water"))){
+                        friendlyWaters[row][col-1].setType("ship_left");
+                        friendlyWaters[row][col].setType("ship_right");
+                        l = true;
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_right));
+                    }
+                    if(!(right.equalsIgnoreCase("water"))){
+                        friendlyWaters[row][col+1].setType("ship_right");
+                        friendlyWaters[row][col].setType("ship_left");
+                        r = true;
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_left));
+                    }
+                    if(b & a){
+                        friendlyWaters[row][col].setType("ship_middle_v");
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_middle_v));
+                    }
+                    if(l & r){
+                        friendlyWaters[row][col].setType("ship_middle_h");
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_middle_h));
+                    }
+                    if((!b) & (!a) & (!l) & (!r)){
+                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_one)); //NOT SHOWING
+                        friendlyWaters[row][col].setType("ship_one");
+                    }
+                }
+                else {
                     //v.setBackgroundColor(Color.BLUE);
                     im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.water)); //???
-                    //friendlyWaters[row][col].setType("water");
+                    friendlyWaters[row][col].setType("water");
+
                 }
             }
         };

@@ -71,13 +71,12 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_their_turn);
 
-        if (first)
-        {
+        if (first){
             // Get friendlyWaters from the setup screen
             friendlyWaters = SetupActivity.getFriendlyWaters();
             first = false;
         }
-        //will first stay false?
+        //will first stay false? yes, because it's only for when the game first runs
 
 
         //wait to get hit
