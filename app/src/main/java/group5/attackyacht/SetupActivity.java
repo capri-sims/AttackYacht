@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
+import java.util.Random;
 
 public class SetupActivity extends AppCompatActivity {
 
@@ -46,12 +47,18 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //determine who goes first
-                //from... bluetooth?
-                //if you go first - gameplay1Activity
-                //else - gameplay2Activity
+                Boolean firstTurn = determineFirst ();
+                Intent goToPlayersTurn = new Intent(SetupActivity.this, PlayYourTurnActivity.class);
+                Intent goToOpponentsTurn = new Intent(SetupActivity.this, PlayTheirTurnActivity.class);
 
-                Intent intent = new Intent(SetupActivity.this, PlayTheirTurnActivity.class);
-                startActivity(intent);
+                if (firstTurn == true)
+                {
+                    startActivity(goToPlayersTurn);
+                }
+                else
+                {
+                    startActivity(goToOpponentsTurn);
+                }
             }
         });
     }
@@ -133,5 +140,52 @@ public class SetupActivity extends AppCompatActivity {
 
     static public Ship[][] getFriendlyWaters(){
         return friendlyWaters;
+    }
+
+/*
+********************************************************************************
+*** determineFirst
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Determines which of the two players will make the first move
+*** Inputs:
+*** n/a
+*** Outputs:
+*** Boolean firstTurn
+********************************************************************************
+*** Date
+*** 11/27/15
+********************************************************************************
+*/
+    public Boolean determineFirst ()
+    {
+        // True, player goes first; False, opponent goes first
+        Boolean firstTurn = null;
+
+        // Generate an int b/t 0 & 5, compare w/ opponent, larger number goes
+        // first. Repeat on equal value.
+        Random randGenerator = new Random ();
+
+        // Loop until the firstTurn is determined
+        while (firstTurn == null)
+        {
+            int yourRandValue = nextInt.randGenerator(5);
+
+            // SEND / RECEIVE # TO / FROM OPPONENT
+            // PLACEHOLDER FOR VALUE TO BE RECEIVED
+            int theirRandValue = 2;
+
+            if (yourRandValue > theirRandValue)
+            {
+                firstTurn = true;
+            }
+            else if (yourRandValue < theirRandValue)
+            {
+                firstTurn = false;
+            }
+        }
+
+        return firstTurn;
     }
 }

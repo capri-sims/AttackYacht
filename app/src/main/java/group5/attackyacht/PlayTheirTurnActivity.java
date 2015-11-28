@@ -4,9 +4,9 @@
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Handles gameplay elements such as player turns, interactions b/t players
-*** (attacks), tracking the status of the game, and informing players of the
-*** status of the game.                 OOPS NEED TO REWRITE
+*** Handles game play elements that occurs on the player's turn such as
+*** interactions b/t players (attacks), tracking the status of the game, and
+*** informing players of the status of the game.
 ********************************************************************************
 *** Date:
 *** 11/23/15
@@ -39,11 +39,6 @@ import android.widget.Toast;
 
 public class PlayTheirTurnActivity extends AppCompatActivity
 {
-    // Global variable
-
-        // Turn tracking?
-        static boolean first = true;
-
     // Class-wide variables
 
         // 2D array tracking opponent player ships & their status
