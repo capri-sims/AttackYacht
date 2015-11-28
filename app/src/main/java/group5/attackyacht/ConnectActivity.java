@@ -79,9 +79,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
 
         //here down Jonathan Added
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         mDiscover = (Button) findViewById(R.id.button_connect);
         mDiscover.setOnClickListener(this);
 

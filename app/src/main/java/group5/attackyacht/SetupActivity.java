@@ -35,7 +35,7 @@ public class SetupActivity extends AppCompatActivity {
                 friendlyWaters[i][j] = new Ship("water", i, j);
                 image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.water));
                 //image.setBackgroundColor(Color.BLUE);
-                image.setId(i + j);
+                //image.setId(i + j);
                 row.addView(image, 100, 100);
                 image.setOnClickListener(onClick(image, i, j));
             }
@@ -170,7 +170,7 @@ public class SetupActivity extends AppCompatActivity {
         // Loop until the firstTurn is determined
         while (firstTurn == null)
         {
-            int yourRandValue = nextInt.randGenerator(5);
+            int yourRandValue = randGenerator.nextInt(5);
 
             // SEND / RECEIVE # TO / FROM OPPONENT
             // PLACEHOLDER FOR VALUE TO BE RECEIVED
@@ -187,5 +187,7 @@ public class SetupActivity extends AppCompatActivity {
         }
 
         return firstTurn;
+
+        //TODO: Needs to communicate with other phone (via fileTrasferServie?)
     }
 }

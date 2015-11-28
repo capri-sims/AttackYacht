@@ -32,17 +32,20 @@ package group5.attackyacht;
 
 // Imported libraries
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class PlayTheirTurnActivity extends AppCompatActivity
 {
-    // Class-wide variables
-
-        // 2D array tracking opponent player ships & their status
-        static private Ship[][] friendlyWaters;
+    static private int ROW = 7;
+    static private int COL = 12;
+    static boolean firstRun = true; // Turn tracking? no
+    static private Ship[][] friendlyWaters = new Ship[ROW][COL];  // 2D array tracking opponent player ships & their status
 
 /*
 ********************************************************************************
@@ -66,10 +69,12 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_their_turn);
 
-        if (first){
+        if (firstRun){
             // Get friendlyWaters from the setup screen
             friendlyWaters = SetupActivity.getFriendlyWaters();
-            first = false;
+
+
+            firstRun = false;
         }
         //will first stay false? yes, because it's only for when the game first runs
 
@@ -80,7 +85,9 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         //display message
         //determine end
         //open your turn
+
     }
+
 
 /*
 ********************************************************************************
