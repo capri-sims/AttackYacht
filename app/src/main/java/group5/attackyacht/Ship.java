@@ -7,7 +7,7 @@
 *** Object to handle variables relevant to ship game pieces
 ********************************************************************************
 *** Date:
-*** 11/23/15
+*** 11/21/15
 ********************************************************************************
 *** Change Log:
 *** 11/21/15 - CS - Class created and laid out
@@ -29,10 +29,10 @@ package group5.attackyacht;
 
 public class Ship {
 
-    private String type; //type must correspond to the image to be displayed
+    private static String type; //type must correspond to the image to be displayed
     //Valid types: water, destroyed, ship_bottom, ship_top, ship_middle_h, ship_middle_v, ship_left, ship_right
-    private int health;
-    private boolean hit;
+    private static int health;
+    private static boolean hit;
     private int row;
     private int col;
 
@@ -76,7 +76,7 @@ public class Ship {
 *** 11/21/15
 ********************************************************************************
 */
-    public boolean hit(){
+    public static boolean hit(){
         hit = true;
 
         if(type == "water"){

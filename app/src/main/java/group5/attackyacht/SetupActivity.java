@@ -48,16 +48,16 @@ public class SetupActivity extends AppCompatActivity {
 
                 //determine who goes first
                 Boolean firstTurn = determineFirst ();
-                Intent goToPlayersTurn = new Intent(SetupActivity.this, PlayYourTurnActivity.class);
-                Intent goToOpponentsTurn = new Intent(SetupActivity.this, PlayTheirTurnActivity.class);
+                Intent goToYourTurn = new Intent(SetupActivity.this, PlayYourTurnActivity.class);
+                Intent goToTheirTurn = new Intent(SetupActivity.this, PlayTheirTurnActivity.class);
 
                 if (firstTurn == true)
                 {
-                    startActivity(goToPlayersTurn);
+                    startActivity(goToYourTurn);
                 }
                 else
                 {
-                    startActivity(goToOpponentsTurn);
+                    startActivity(goToTheirTurn);
                 }
             }
         });

@@ -16,8 +16,7 @@
 *** 11/23/15 - CS - Created onCreate
 *** 11/23/15 - CS - Created displayMessage
 *** 11/24/15 - ZC - Formatted page for comments & style
-*** 11/24/15 - ZC - Created onClickFire
-*** 11/24/15 - ZC - Created & designed determineEnd
+*** 11/24/15 - ZC - Created processAttack
 *** 11/xx/15 - xx -
 ***
 ********************************************************************************
@@ -32,29 +31,20 @@ package group5.attackyacht;
 // Imported libraries
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 public class PlayYourTurnActivity extends AppCompatActivity
 {
-    // Global variable
+    // Class-wide variables
 
-    static private int ROW = 7;
-    static private int COL = 12;
-    //static boolean first = true;
-    static private Ship[][] enemyWaters  = new Ship[ROW][COL];
-    private static boolean firstRun = true; // Check for first run for initialization purposes
-    private ImageView selectedSquare;
-    private Ship selectedShip;
+    // Check for first run for initialization purposes
+    private static boolean firstRun = true;
 
+    // 2D array tracking opponent player ships & their status
+    static private Ship[][] enemyWaters;
 /*
 ********************************************************************************
 *** onCreate
@@ -76,48 +66,35 @@ public class PlayYourTurnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_your_turn);
 
-        TableLayout table = (TableLayout) findViewById(R.id.shipSetupGrid);
-
         if(firstRun){
-            for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
-                TableRow row = new TableRow(this);
-                for(int j = 0; j < COL; j++){
-
-                    ImageView image = new ImageView (this);
+            for(int i = 0; i < 10; i++){ //Initialize enemy waters //will this rewrite everytime???
+                for(int j = 0; j < 10; j++){
                     enemyWaters[i][j] = new Ship("water", i, j);
-                    image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.water));
-                    row.addView(image, 100, 100);
-                    image.setOnClickListener(onClick(image, i, j));
-
                 }
-                table.addView(row);
             }
             firstRun = false;
         }
 
-        Button buttonFire = (Button) findViewById(R.id.button_fire);
-        buttonFire.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
 
-                //send selectedSquare to other phone (via FileTransferService?)
-                //get response
-                //display message
-                //update enemyWaters
-                //show updated array
 
-                Intent intent = new Intent(PlayYourTurnActivity.this, PlayTheirTurnActivity.class);
-                startActivity(intent);
-            }
-        });
+    //add selectable tiles...
+    //onclick fire
+    //send loc to bluetooth
+    //wait for response
+    //display message
+    //update ship array for hit locations... and destroyed
+    //their turn
     }
 
 /*
 ********************************************************************************
-*** onClick
+*** onClickFire
 *** Group 5
 ********************************************************************************
 *** Purpose:
+*** Displays the game screen, initializes enemyWaters, and continues game loop
 *** Inputs:
+*** Bundle savedInstanceState
 *** Outputs:
 *** n/a
 ********************************************************************************
@@ -125,14 +102,6 @@ public class PlayYourTurnActivity extends AppCompatActivity
 *** 11/23/15
 ********************************************************************************
 */
-View.OnClickListener onClick(final ImageView im, final int row, final int col) {
-    return new View.OnClickListener() {
-        public void onClick(View v) {
-            selectedSquare = (ImageView) v;
-            selectedShip = enemyWaters[row][col];
-        }
-    };
-};
 
 
 
@@ -180,7 +149,7 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** 11/25/15
 ********************************************************************************
 */
-    public void processAttack (int attackCoordinates []) //probably better to use either Ship or ImageView
+    public void processAttack (int attackCoordinates [])
     {
         // SEND attackCoordinates TO OPPONENT
         // PLACEHOLDER VALUE FOR ATTACK RESULTS FROM OPPONENT
@@ -189,28 +158,24 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         // Check on result of attack, alter enemyWaters if successful
         if (attackResults [0] == true)
         {
+            enemyWaters [attackCoordinates [0]][attackCoordinates [1]].hit();
 
+            // DISPLAY MESSAGE THAT ATTACK WAS SUCCESSFUL
         }
-    }
+        else
+        {
+            // DISPLAY MESSAGE THAT ATTACK MISSED
+        }
 
-/*
-********************************************************************************
-*** getVictory
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Returns victory variable, tracks who won the game
-*** Inputs:
-*** n/a
-*** Outputs:
-*** Boolean victory
-********************************************************************************
-*** Date
-*** 11/25/15
-********************************************************************************
-*/
-    public void getVictory(){
+        // Check if game is over, call gameOverActivity if it is
+        if (attackResults [1] == true)
+        {
+            // Set player as winner
+            GameOverActivity.setVictory (true);
 
-        //get info from connection service
+            // Switch over to gameOverActivity screen
+            Intent toGameOver = new Intent (PlayYourTurnActivity.this, GameOverActivity.class);
+            startActivity (toGameOver);
+        }
     }
 }
