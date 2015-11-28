@@ -67,7 +67,7 @@ public class PlayYourTurnActivity extends AppCompatActivity
         setContentView(R.layout.activity_play_your_turn);
 
         if(firstRun){
-            for(int i = 0; i < 10; i++){ //Initialize enemy waters //will this rewrite everytime???
+            for(int i = 0; i < 10; i++){ //Initialize enemy waters
                 for(int j = 0; j < 10; j++){
                     enemyWaters[i][j] = new Ship("water", i, j);
                 }
@@ -75,15 +75,9 @@ public class PlayYourTurnActivity extends AppCompatActivity
             firstRun = false;
         }
 
-
-
-    //add selectable tiles...
-    //onclick fire
-    //send loc to bluetooth
-    //wait for response
-    //display message
-    //update ship array for hit locations... and destroyed
-    //their turn
+    // TODO: onCreate; add selectable tiles...
+    // TODO: onCreate; onclick fire, processAttack is done though
+    // TODO: onCreate; Begin their turn
     }
 
 /*
@@ -151,8 +145,8 @@ public class PlayYourTurnActivity extends AppCompatActivity
 */
     public void processAttack (int attackCoordinates [])
     {
-        // SEND attackCoordinates TO OPPONENT
-        // PLACEHOLDER VALUE FOR ATTACK RESULTS FROM OPPONENT
+        // TODO: processAttack; SEND attackCoordinates TO OPPONENT
+        // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults FROM OPPONENT
         Boolean attackResults [] = new Boolean [] {true, false};
 
         // Check on result of attack, alter enemyWaters if successful
@@ -160,11 +154,11 @@ public class PlayYourTurnActivity extends AppCompatActivity
         {
             enemyWaters [attackCoordinates [0]][attackCoordinates [1]].hit();
 
-            // DISPLAY MESSAGE THAT ATTACK WAS SUCCESSFUL
+            // TODO: processAttack; DISPLAY MESSAGE THAT ATTACK WAS SUCCESSFUL
         }
         else
         {
-            // DISPLAY MESSAGE THAT ATTACK MISSED
+            // TODO: processAttack; DISPLAY MESSAGE THAT ATTACK MISSED
         }
 
         // Check if game is over, call gameOverActivity if it is

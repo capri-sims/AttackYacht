@@ -46,18 +46,18 @@ public class SetupActivity extends AppCompatActivity {
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                //determine who goes first
+                // Determine who goes first
                 Boolean firstTurn = determineFirst ();
-                Intent goToYourTurn = new Intent(SetupActivity.this, PlayYourTurnActivity.class);
-                Intent goToTheirTurn = new Intent(SetupActivity.this, PlayTheirTurnActivity.class);
+                Intent goToYourTurn = new Intent (SetupActivity.this, PlayYourTurnActivity.class);
+                Intent goToTheirTurn = new Intent (SetupActivity.this, PlayTheirTurnActivity.class);
 
                 if (firstTurn == true)
                 {
-                    startActivity(goToYourTurn);
+                    startActivity (goToYourTurn);
                 }
                 else
                 {
-                    startActivity(goToTheirTurn);
+                    startActivity (goToTheirTurn);
                 }
             }
         });

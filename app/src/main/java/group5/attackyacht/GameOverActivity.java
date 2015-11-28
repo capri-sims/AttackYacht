@@ -35,7 +35,7 @@ public class GameOverActivity extends AppCompatActivity {
     // Class-wide variable
 
     // Holds status of which player won; True, player won; False, play lost
-    private static Boolean victory;
+    private static Boolean victory = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
