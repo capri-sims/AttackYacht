@@ -8,6 +8,11 @@ import android.widget.Button;
 
 public class GameOverActivity extends AppCompatActivity {
 
+    // Class-wide variable
+
+    // Holds status of which player won; True, player won; False, play lost
+    private static Boolean victory = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +35,32 @@ public class GameOverActivity extends AppCompatActivity {
         // button to exit
         Button buttonExit = (Button)findViewById(R.id.button_exit);
         buttonExit.setOnClickListener((v)-> {
-            @Override
-                    public void onClick(View v){
-                    finish();
-                    System.exit(0);
-            }
+            finish();
+            System.exit(0);
         });
 
 
+    }
+
+    /*
+********************************************************************************
+*** setVictory
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Alters victory so victory status can be displayed
+*** Inputs:
+*** Boolean newVictory
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/25/15
+********************************************************************************
+*/
+    public static void setVictory (Boolean newVictory)
+    {
+        victory = newVictory;
     }
 }
 

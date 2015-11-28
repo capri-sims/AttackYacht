@@ -1,4 +1,4 @@
-package group5.attackyacht;
+package group5.attackyacht; //TODO: write dummy device for testing
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -80,7 +80,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         //here down Jonathan Added
 
         mDiscover = (Button) findViewById(R.id.button_connect);
-        mDiscover.setOnClickListener(this);
+        mDiscover.setOnClickListener(this); //huh?
 
         //mDevices = (TextView) findViewById(R.id.peers);
 
@@ -114,11 +114,11 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         unregisterReceiver(mReceiver);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    @Override //NO MENU
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
     private class WiFiDirectReceiver extends BroadcastReceiver {
 
@@ -230,6 +230,12 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onFailure(int reason) {
                 Toast.makeText(ConnectActivity.this, "Discover peers failed.", Toast.LENGTH_SHORT).show();
+
+                //TAKE THIS OUT LATER
+                //THIS ALLOWS THE APP TO MOVE FORWARD FOR TESTING
+                Intent intent = new Intent(ConnectActivity.this, SetupActivity.class);
+                startActivity(intent);
+                ///////////////////
             }
         });
     }

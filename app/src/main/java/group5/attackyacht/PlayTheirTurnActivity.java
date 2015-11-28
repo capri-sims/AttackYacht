@@ -34,10 +34,14 @@ package group5.attackyacht;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 public class PlayTheirTurnActivity extends AppCompatActivity
@@ -76,8 +80,16 @@ public class PlayTheirTurnActivity extends AppCompatActivity
             firstRun = false;
         }
 
+        updateGrid();
         // TODO: onCreate; Begin processAttack
         // TODO: onCreate; Being your turn
+
+        //wait to get hit
+        //from bluetooth
+        //update ship array
+        //display message
+        //determine end
+        //open your turn
 
     }
 
