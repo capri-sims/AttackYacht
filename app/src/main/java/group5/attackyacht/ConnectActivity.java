@@ -49,6 +49,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
     private ArrayList<WifiP2pDevice> mDeviceList = new ArrayList<WifiP2pDevice>();
     public static final String TAG = "YOUR-TAG-NAME";
     private String m_Text = "";
+    public String outputText;
 
     int flag = 0;
 
@@ -190,31 +191,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.button_connect:
                 onDiscover();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Title");
-
-                // Set up the input
-                final EditText input = new EditText(this);
-                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                builder.setView(input);
-
-                // Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        m_Text = input.getText().toString();
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
                 break;
         }
     }
@@ -244,6 +220,15 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         DeviceListDialog deviceListDialog = new DeviceListDialog();
         deviceListDialog.show(getFragmentManager(), "devices");
     }
+
+    public void sendInfo(String info){
+        new FileServerAsyncTask(getApplicationContext()).execute();
+    }
+
+    public String getInfo(){
+        return outputText;
+    }
+
 
     private class DeviceListDialog extends DialogFragment {
 
@@ -399,6 +384,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         protected void onPostExecute(String result) {
             if (result != null) {
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();;
+                outputText = result;
             }
 
         }
