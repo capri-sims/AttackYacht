@@ -1,5 +1,25 @@
+/*
+********************************************************************************
+*** SetupActivity.java
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Players choose where they wish to place their ships pre-game, which then
+*** carries over to PlayYourTurnActivity & PlayTheirTurnActivity
+********************************************************************************
+*** Date:
+*** 11/19/15
+********************************************************************************
+*** Change Log:
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
+
+// Project Package
 package group5.attackyacht;
 
+// Imported libraries
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,6 +42,22 @@ public class SetupActivity extends AppCompatActivity {
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
 
+/*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/19/15
+********************************************************************************
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +99,22 @@ public class SetupActivity extends AppCompatActivity {
         });
     }
 
+/*
+********************************************************************************
+*** onClick
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** final ImageView im, final int row, final int col
+*** Outputs:
+*** View.OnClickListener
+********************************************************************************
+*** Date
+*** 11/23/15
+********************************************************************************
+*/
     View.OnClickListener onClick(final ImageView im, final int row, final int col)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
@@ -138,6 +190,22 @@ public class SetupActivity extends AppCompatActivity {
         };
     };
 
+    /*
+********************************************************************************
+*** getFriendlyWaters
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Returns friendlyWaters
+*** Inputs:
+*** n/a
+*** Outputs:
+*** ship [][] friendlyWaters
+********************************************************************************
+*** Date
+*** 11/23/15
+********************************************************************************
+*/
     static public Ship[][] getFriendlyWaters(){
         return friendlyWaters;
     }

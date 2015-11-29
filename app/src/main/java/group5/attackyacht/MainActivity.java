@@ -1,5 +1,25 @@
+/*
+********************************************************************************
+*** MainActivity.java
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Main navigation for player that appears on start up
+********************************************************************************
+*** Date:
+*** 11/17/15
+********************************************************************************
+*** Change Log:
+*** 11/17/15 - CS - Created onCreate
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
+
+// Project Package
 package group5.attackyacht;
 
+// Imported libraries
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +28,22 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+/*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

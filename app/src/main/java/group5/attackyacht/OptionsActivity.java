@@ -1,6 +1,35 @@
+/*
+********************************************************************************
+*** OptionsActivity.java
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** A {@link PreferenceActivity} that presents a set of application settings. On
+*** handset devices, settings are presented as a single list. On tablets,
+*** settings are split by category, with category headers shown to the left of
+*** the list of settings.
+********************************************************************************
+*** Date:
+*** 11/17/15
+********************************************************************************
+*** Change Log:
+*** 11/17/15 - CS - Created onCreate
+*** 11/17/15 - CS - Created setupActionBar
+*** 11/17/15 - CS - Created onIsMultiPane
+*** 11/17/15 - CS - Created isXLargeTablet
+*** 11/17/15 - CS - Created onBuildHeaders
+*** 11/17/15 - CS - Created sBindPreferenceSummaryToValueListener
+*** 11/17/15 - CS - Created bindPreferenceSummaryToValue
+*** 11/17/15 - CS - Created isValidFragment
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
+
+// Project Package
 package group5.attackyacht;
 
-
+// Imported libraries
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -23,26 +52,50 @@ import android.view.MenuItem;
 import java.util.List;
 
 /**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p/>
  * See <a href="http://developer.android.com/design/patterns/settings.html">
  * Android Design: Settings</a> for design guidelines and the <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class OptionsActivity extends AppCompatPreferenceActivity {
+    /*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
     }
 
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
+    /*
+********************************************************************************
+*** setupActionBar
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Set up the {@link android.app.ActionBar}, if the API is available.
+*** Inputs:
+*** n/a
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -51,10 +104,22 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-
-    /**
-     * {@inheritDoc}
-     */
+    /*
+********************************************************************************
+*** onIsMultiPane
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** {@inheritDoc}
+*** Inputs:
+*** n/a
+*** Outputs:
+*** isXLargeTablet
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this);
@@ -64,24 +129,69 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
      * Helper method to determine if the device has an extra-large screen. For
      * example, 10" tablets are extra-large.
      */
+    /*
+********************************************************************************
+*** isXLargeTablet
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Helper method to determine if the device has an extra-large screen. For
+*** example, 10" tablets are extra-large.
+*** Inputs:
+*** Context context
+*** Outputs:
+*** (context.getResources().getConfiguration().screenLayout &
+*** Configuration.SCREENLAYOUT_SIZE_MASK) >=
+*** Configuration.SCREENLAYOUT_SIZE_XLARGE;
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     private static boolean isXLargeTablet(Context context) {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /*
+********************************************************************************
+*** onBuildHeaders
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** {@inheritDoc}
+*** Inputs:
+*** List<Header> target
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     @Override
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
         loadHeadersFromResource(R.xml.pref_headers, target);
     }
 
-    /**
-     * A preference value change listener that updates the preference's summary
-     * to reflect its new value.
-     */
+    /*
+********************************************************************************
+*** sBindPreferenceSummaryToValueListener
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** A preference value change listener that updates the preference's summary
+*** to reflect its new value.
+*** Inputs:
+***
+*** Outputs:
+*** Boolean true
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -130,15 +240,27 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
         }
     };
 
-    /**
-     * Binds a preference's summary to its value. More specifically, when the
-     * preference's value is changed, its summary (line of text below the
-     * preference title) is updated to reflect the value. The summary is also
-     * immediately updated upon calling this method. The exact display format is
-     * dependent on the type of preference.
-     *
-     * @see #sBindPreferenceSummaryToValueListener
-     */
+    /*
+********************************************************************************
+*** bindPreferenceSummaryToValue
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Binds a preference's summary to its value. More specifically, when the
+*** preference's value is changed, its summary (line of text below the
+*** preference title) is updated to reflect the value. The summary is also
+*** immediately updated upon calling this method. The exact display format is
+*** dependent on the type of preference.
+*** @see #sBindPreferenceSummaryToValueListener
+*** Inputs:
+*** Preference preference
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -151,10 +273,26 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
-    /**
-     * This method stops fragment injection in malicious applications.
-     * Make sure to deny any unknown fragments here.
-     */
+    /*
+********************************************************************************
+*** isValidFragment
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** This method stops fragment injection in malicious applications.
+*** Make sure to deny any unknown fragments here.
+*** Inputs:
+*** String fragmentName
+*** Outputs:
+*** PreferenceFragment.class.getName().equals(fragmentName),
+*** GeneralPreferenceFragment.class.getName().equals(fragmentName),
+*** DataSyncPreferenceFragment.class.getName().equals(fragmentName),
+*** NotificationPreferenceFragment.class.getName().equals(fragmentName)
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
@@ -162,12 +300,43 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
                 || NotificationPreferenceFragment.class.getName().equals(fragmentName);
     }
 
-    /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
+
+    /*
+********************************************************************************
+*** GeneralPreferenceFragment
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** This fragment shows general preferences only. It is used when the
+*** activity is showing a two-pane settings UI.
+********************************************************************************
+*** Date:
+*** 11/17/15
+********************************************************************************
+*** Change Log:
+*** 11/17/15 - CS - Created onCreate
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class GeneralPreferenceFragment extends PreferenceFragment {
+        /*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -193,12 +362,43 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
 //        }
     }
 
-    /**
-     * This fragment shows notification preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
+    /*
+********************************************************************************
+*** NotificationPreferenceFragment
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** This fragment shows notification preferences only. It is used when the
+*** activity is showing a two-pane settings UI.
+********************************************************************************
+*** Date:
+*** 11/17/15
+********************************************************************************
+*** Change Log:
+*** 11/17/15 - CS - Created onCreate
+*** 11/17/15 - CS - Created onOptionsItemSelected
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class NotificationPreferenceFragment extends PreferenceFragment {
+        /*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -212,6 +412,22 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
         }
 
+        /*
+********************************************************************************
+*** onOptionsItemSelected
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** MenuItem item
+*** Outputs:
+*** Boolean true, Boolean super.onOptionsItemSelected(item)
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
@@ -227,8 +443,43 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
      * This fragment shows data and sync preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
+    /*
+********************************************************************************
+*** DataSyncPreferenceFragment
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** This fragment shows data and sync preferences only. It is used when the
+*** activity is showing a two-pane settings UI.
+********************************************************************************
+*** Date:
+*** 11/17/15
+********************************************************************************
+*** Change Log:
+*** 11/17/15 - CS - Created onCreate
+*** 11/17/15 - CS - Created onOptionsItemSelected
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class DataSyncPreferenceFragment extends PreferenceFragment {
+        /*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -242,6 +493,22 @@ public class OptionsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("sync_frequency"));
         }
 
+        /*
+********************************************************************************
+*** onOptionsItemSelected
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** MenuItem item
+*** Outputs:
+*** Boolean true, Boolean super.onOptionsItemSelected(item)
+********************************************************************************
+*** Date
+*** 11/17/15
+********************************************************************************
+*/
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();

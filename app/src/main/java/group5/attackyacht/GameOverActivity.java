@@ -1,5 +1,27 @@
+/*
+********************************************************************************
+*** GameOverActivity.java
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Activates when a game has concluded, informing the player to the result of
+*** the game. Allows player to return to menu or play again.
+********************************************************************************
+*** Date:
+*** 11/19/15
+********************************************************************************
+*** Change Log:
+*** 11/19/15 - CS - Created onCreate
+*** 11/25/15 - ZC - Created setVictory
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
+
+// Project Package
 package group5.attackyacht;
 
+// Imported libraries
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +35,22 @@ public class GameOverActivity extends AppCompatActivity {
     // Holds status of which player won; True, player won; False, play lost
     private static Boolean victory = null;
 
+    /*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/19/15
+********************************************************************************
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +76,6 @@ public class GameOverActivity extends AppCompatActivity {
             finish();
             System.exit(0);
         });
-
-
     }
 
     /*

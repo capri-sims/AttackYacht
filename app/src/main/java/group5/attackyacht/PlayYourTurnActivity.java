@@ -17,11 +17,10 @@
 *** 11/23/15 - CS - Created displayMessage
 *** 11/24/15 - ZC - Formatted page for comments & style
 *** 11/24/15 - ZC - Created processAttack
+*** 11/27/15 - CS - Created onClick
+*** 11/27/15 - CS - Created updateGrid
 *** 11/xx/15 - xx -
 ***
-********************************************************************************
-*** Look at this:
-*** n/a
 ********************************************************************************
 */
 

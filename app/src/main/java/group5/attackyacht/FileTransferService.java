@@ -1,5 +1,25 @@
+/*
+********************************************************************************
+*** FileTransferService.java
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** A service that process each file transfer request i.e Intent by opening a
+*** socket connection with the WiFi Direct Group Owner and writing the file
+********************************************************************************
+*** Date:
+*** 11/xx/15
+********************************************************************************
+*** Change Log:
+*** 11/27/15 - JB -
+***
+********************************************************************************
+*/
+
+// Project Package
 package group5.attackyacht;
 
+// Imported libraries
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
@@ -25,11 +45,6 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-
-/**
- * A service that process each file transfer request i.e Intent by opening a
- * socket connection with the WiFi Direct Group Owner and writing the file
- */
 public class FileTransferService extends IntentService {
 
     private static final int SOCKET_TIMEOUT = 5000;
@@ -38,14 +53,62 @@ public class FileTransferService extends IntentService {
     public static final String EXTRAS_GROUP_OWNER_ADDRESS = "go_host";
     public static final String EXTRAS_GROUP_OWNER_PORT = "go_port";
 
+    /*
+********************************************************************************
+*** FileTransferService
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** String name
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/27/15
+********************************************************************************
+*/
     public FileTransferService(String name) {
         super(name);
     }
 
+    /*
+********************************************************************************
+*** FileTransferService
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** n/a
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/27/15
+********************************************************************************
+*/
     public FileTransferService() {
         super("FileTransferService");
     }
 
+    /*
+********************************************************************************
+*** onHandleIntent
+*** Group 5
+********************************************************************************
+*** Purpose:
+***
+*** Inputs:
+*** Intent intent
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/27/15
+********************************************************************************
+*/
     @Override
     protected void onHandleIntent(Intent intent) {
 
