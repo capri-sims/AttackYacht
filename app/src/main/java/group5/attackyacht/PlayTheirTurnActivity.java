@@ -18,6 +18,7 @@
 *** 11/24/15 - ZC - Formatted page for comments & style
 *** 11/24/15 - ZC - Created determineEnd
 *** 11/26/15 - ZC - Created processAttack
+*** 11/29/15 - xx - Created updateGrid
 *** 11/xx/15 - xx -
 ***
 ********************************************************************************
@@ -80,14 +81,6 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         updateGrid();
         // TODO: onCreate; Begin processAttack
         // TODO: onCreate; Being your turn
-
-        //wait to get hit
-        //from bluetooth
-        //update ship array
-        //display message
-        //determine end
-        //open your turn
-
     }
 
 
@@ -210,6 +203,37 @@ public class PlayTheirTurnActivity extends AppCompatActivity
             // Switch over to gameOverActivity screen
             Intent toGameOver = new Intent (PlayTheirTurnActivity.this, GameOverActivity.class);
             startActivity (toGameOver);
+        }
+    }
+
+/*
+********************************************************************************
+*** updateGrid
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Updates the graphics displayed within the on screen grid
+*** Inputs:
+*** n/a
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/29/15
+********************************************************************************
+*/
+    private void updateGrid(){ //will this override the onClickListeners???
+
+        TableLayout table = (TableLayout) findViewById(R.id.friendlyWaters);
+        for (int i = 0; i < ROW; i++){
+            TableRow row = new TableRow(this);
+            for (int j = 0; j < COL; j++){
+                ImageView image = new ImageView (this);
+                int imageID = getResources().getIdentifier((friendlyWaters[i][j]).getType(), "drawable", getPackageName());
+                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
+                row.addView(image, 100, 100);
+            }
+            table.addView(row);
         }
     }
 }

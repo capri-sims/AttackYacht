@@ -117,13 +117,14 @@ public class PlayYourTurnActivity extends AppCompatActivity
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Displays the game screen, initializes enemyWaters, and continues game loop
+***
 *** Inputs:
+*** final ImageView im, final int row, final int col
 *** Outputs:
-*** n/a
+*** View.OnClickListener
 ********************************************************************************
 *** Date
-*** 11/23/15
+*** 11/27/15
 ********************************************************************************
 */
 View.OnClickListener onClick(final ImageView im, final int row, final int col) {
@@ -205,6 +206,22 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         }
     }
 
+/*
+********************************************************************************
+*** updateGrid
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Updates the graphics displayed within the on screen grid
+*** Inputs:
+*** n/a
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/27/15
+********************************************************************************
+*/
     private void updateGrid(){ //will this override the onClickListeners???
 
         TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
