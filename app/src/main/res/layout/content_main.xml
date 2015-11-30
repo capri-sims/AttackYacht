@@ -13,6 +13,13 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <Button
+        android:id="@+id/button_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="2 Player - Local" />
+
 
     <Button
         android:id="@+id/button_wifi"
@@ -34,11 +41,6 @@
         android:layout_below="@+id/button_wifi"
         android:text="Options" />
 
-    <Button
-        android:id="@+id/button_local"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="2 Player - Local" />
+
 
 </RelativeLayout>
