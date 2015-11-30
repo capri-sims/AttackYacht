@@ -73,12 +73,12 @@ public class P1TurnActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_your_turn);
+        setContentView(R.layout.activity_p1_turn);
 
         if(firstRun){
 
             //creates the 2D array
-            TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
+            TableLayout table = (TableLayout) findViewById(R.id.watersP1);
             for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
                 TableRow row = new TableRow(P1TurnActivity.this);
                 for(int j = 0; j < COL; j++){

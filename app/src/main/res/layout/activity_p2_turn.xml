@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Fire" />
+        android:text="Fire!" />
 
     <TableLayout
-        android:id="@+id/friendlyWaters"
+        android:id="@+id/watersP2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@+id/button_fireP2"

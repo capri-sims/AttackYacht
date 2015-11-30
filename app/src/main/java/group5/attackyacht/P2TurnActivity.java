@@ -68,7 +68,7 @@ public class P2TurnActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_their_turn);
+        setContentView(R.layout.activity_p2_turn);
 
         // Only run on first run
         if (firstRun){
@@ -353,13 +353,13 @@ public class P2TurnActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_their_turn);
+        setContentView(R.layout.activity_p1_turn);
 
         if(firstRun){
 
             //creates the 2D array
-            TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
-            for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
+            TableLayout table = (TableLayout) findViewById(R.id.watersP2);
+            for(int i = 0; i < ROW; i++){ //Initialize enemy waters
                 TableRow row = new TableRow(P2TurnActivity.this);
                 for(int j = 0; j < COL; j++){
 

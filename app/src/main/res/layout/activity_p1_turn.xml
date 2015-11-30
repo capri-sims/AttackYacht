@@ -22,5 +22,5 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/button_fireP1"
-        android:id="@+id/enemyWaters"></TableLayout>
+        android:id="@+id/watersP1"></TableLayout>
 </RelativeLayout>
