@@ -40,6 +40,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class P1TurnActivity extends AppCompatActivity
@@ -53,6 +54,9 @@ public class P1TurnActivity extends AppCompatActivity
     private static boolean firstRun = true; // Check for first run for initialization purposes
     private ImageView selectedSquare;
     private Ship selectedShip;
+    private int fireCol= 0;
+    private int fireRow = 0;
+
 
 /*
 ********************************************************************************
@@ -114,6 +118,7 @@ public class P1TurnActivity extends AppCompatActivity
 
                 Intent intent = new Intent(P1TurnActivity.this, P2TurnActivity.class);
                 startActivity(intent);
+
             }
         });
     }
@@ -138,7 +143,11 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
     return new View.OnClickListener() {
         public void onClick(View v) {
             selectedSquare = (ImageView) v;
-            selectedShip = enemyWaters[row][col];
+            //selectedShip = enemyWaters[row][col];
+            fireRow = row;
+            fireCol = col;
+            TextView firePos = (TextView) findViewById(R.id.firePosition);
+            firePos.setText("Firing at " + col+1 + ", " + row+1);
         }
     };
 }
