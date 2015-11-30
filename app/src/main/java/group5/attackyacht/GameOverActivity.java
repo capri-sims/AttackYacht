@@ -22,9 +22,10 @@
 package group5.attackyacht;
 
 // Imported libraries
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,6 +35,26 @@ public class GameOverActivity extends AppCompatActivity {
 
     // Holds status of which player won; True, player won; False, play lost
     private static Boolean victory = null;
+
+    /*
+********************************************************************************
+*** setVictory
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Alters victory so victory status can be displayed
+*** Inputs:
+*** Boolean newVictory
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/25/15
+********************************************************************************
+*/
+    public static void setVictory(Boolean newVictory) {
+        victory = newVictory;
+    }
 
     /*
 ********************************************************************************
@@ -69,7 +90,7 @@ public class GameOverActivity extends AppCompatActivity {
         Button buttonAgain = (Button) findViewById(R.id.button_again);
         buttonAgain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(GameOverActivity.this,SetupActivity.class);
+                Intent intent = new Intent(GameOverActivity.this, P1SetupActivity.class);
                 startActivity(intent);
             }
         });
@@ -82,27 +103,6 @@ public class GameOverActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
-    }
-
-    /*
-********************************************************************************
-*** setVictory
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Alters victory so victory status can be displayed
-*** Inputs:
-*** Boolean newVictory
-*** Outputs:
-*** n/a
-********************************************************************************
-*** Date
-*** 11/25/15
-********************************************************************************
-*/
-    public static void setVictory (Boolean newVictory)
-    {
-        victory = newVictory;
     }
 }
 

@@ -11,12 +11,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".AttackYacht"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="AttackYacht">
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape" >
@@ -26,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ConnectActivity"
             android:screenOrientation="landscape" >
@@ -36,7 +34,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".OptionsActivity"
             android:label="@string/title_activity_options"
@@ -47,9 +44,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".SetupActivity"
+            android:name=".P1SetupActivity"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,9 +53,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".PlayTheirTurnActivity"
+            android:name=".P2SetupActivity"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,9 +62,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".PlayYourTurnActivity"
+            android:name=".P2TurnActivity"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,7 +71,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".P1TurnActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".GameOverActivity"
             android:screenOrientation="landscape" >
@@ -94,12 +96,22 @@
         <!-- android:exported="true" > -->
         <!-- </service> -->
 
-        <!--<service-->
-            <!--android:name=".MusicService"-->
-            <!--android:enabled="true"-->
-            <!--android:exported="true" >-->
-        <!--</service>-->
 
+        <!-- <service -->
+        <!-- android:name=".MusicService" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true" > -->
+        <!-- </service> -->
+
+        <activity
+            android:name=".WifiActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -35,12 +35,32 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-public class SetupActivity extends AppCompatActivity {
+public class P1SetupActivity extends AppCompatActivity {
 
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
     private ConnectActivity connection = new ConnectActivity();
+
+    /*
+********************************************************************************
+*** getFriendlyWaters
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Returns friendlyWaters
+*** Inputs:
+*** n/a
+*** Outputs:
+*** ship [][] friendlyWaters
+********************************************************************************
+*** Date
+*** 11/23/15
+********************************************************************************
+*/
+    static public Ship[][] getFriendlyWaters() {
+        return friendlyWaters;
+    }
 
 /*
 ********************************************************************************
@@ -84,10 +104,10 @@ public class SetupActivity extends AppCompatActivity {
 
                 // Determine who goes first
                 boolean firstTurn = determineFirst();
-                Intent goToYourTurn = new Intent (SetupActivity.this, PlayYourTurnActivity.class);
-                Intent goToTheirTurn = new Intent (SetupActivity.this, PlayTheirTurnActivity.class);
+                Intent goToYourTurn = new Intent(P1SetupActivity.this, P1TurnActivity.class);
+                Intent goToTheirTurn = new Intent(P1SetupActivity.this, P2TurnActivity.class);
 
-                if (firstTurn == true)
+                if (firstTurn)
                 {
                     startActivity (goToYourTurn);
                 }
@@ -148,70 +168,50 @@ public class SetupActivity extends AppCompatActivity {
                         (friendlyWaters[row-1][col]).setType("top");
                         (friendlyWaters[row][col]).setType("bottom");
                         b = true;
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_bottom));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_bottom));
                         displayMessage("Below!");
                     }
                     if(!(above.equalsIgnoreCase("water"))){
                         (friendlyWaters[row+1][col]).setType("bottom");
                         (friendlyWaters[row][col]).setType("top");
                         a = true;
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_top));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_top));
                         displayMessage("Above!");
                     }
                     if(!(left.equalsIgnoreCase("water"))){
                         (friendlyWaters[row][col-1]).setType("left");
                         (friendlyWaters[row][col]).setType("right");
                         l = true;
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_right));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_right));
                         displayMessage("Left!");
                     }
                     if(!(right.equalsIgnoreCase("water"))){
                         (friendlyWaters[row][col+1]).setType("right");
                         (friendlyWaters[row][col]).setType("left");
                         r = true;
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_left));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_left));
                         displayMessage("Right!");
                     }
                     if(b & a){
                         (friendlyWaters[row][col]).setType("middle_v");
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_middle_v));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_middle_v));
                     }
                     if(l & r){
                         (friendlyWaters[row][col]).setType("middle_h");
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_middle_h));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_middle_h));
                     }
                     if((!b) & (!a) & (!l) & (!r)){
                         (friendlyWaters[row][col]).setType("one");
-                        im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_one));
+                        im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_one));
                     }
                 }
                 else {
                     //v.setBackgroundColor(Color.BLUE);
                     (friendlyWaters[row][col]).setType("water");
-                    im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_water));
+                    im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_water));
                 }
             }
         };
-    };
-
-    /*
-********************************************************************************
-*** getFriendlyWaters
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Returns friendlyWaters
-*** Inputs:
-*** n/a
-*** Outputs:
-*** ship [][] friendlyWaters
-********************************************************************************
-*** Date
-*** 11/23/15
-********************************************************************************
-*/
-    static public Ship[][] getFriendlyWaters(){
-        return friendlyWaters;
     }
 
 /*

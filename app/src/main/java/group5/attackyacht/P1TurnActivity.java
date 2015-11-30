@@ -28,11 +28,12 @@
 package group5.attackyacht;
 
 // Imported libraries
+
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +42,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
-public class PlayYourTurnActivity extends AppCompatActivity
+public class P1TurnActivity extends AppCompatActivity
 {
     // Class-wide variables
 
@@ -77,7 +78,7 @@ public class PlayYourTurnActivity extends AppCompatActivity
         if(firstRun){
             TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
             for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
-                TableRow row = new TableRow(PlayYourTurnActivity.this);
+                TableRow row = new TableRow(P1TurnActivity.this);
                 for(int j = 0; j < COL; j++){
 
                     ImageView image = new ImageView (this);
@@ -109,7 +110,7 @@ public class PlayYourTurnActivity extends AppCompatActivity
                 // response, displaying the message, and updating enemyWaters, but it'd like the
                 // row / col data from selectedSquare to do so
 
-                Intent intent = new Intent(PlayYourTurnActivity.this, PlayTheirTurnActivity.class);
+                Intent intent = new Intent(P1TurnActivity.this, P2TurnActivity.class);
                 startActivity(intent);
             }
         });
@@ -138,26 +139,25 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
             selectedShip = enemyWaters[row][col];
         }
     };
-};
+}
 
 
-
-/*
-********************************************************************************
-*** displayMessage
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Displays the game screen, initializes enemyWaters, and continues game loop
-*** Inputs:
-*** Bundle savedInstanceState
-*** Outputs:
-*** n/a
-********************************************************************************
-*** Date
-*** 11/23/15
-********************************************************************************
-*/
+    /*
+    ********************************************************************************
+    *** displayMessage
+    *** Group 5
+    ********************************************************************************
+    *** Purpose:
+    *** Displays the game screen, initializes enemyWaters, and continues game loop
+    *** Inputs:
+    *** Bundle savedInstanceState
+    *** Outputs:
+    *** n/a
+    ********************************************************************************
+    *** Date
+    *** 11/23/15
+    ********************************************************************************
+    */
     private void displayMessage(String message){
 
         Context context = getApplicationContext();
@@ -199,7 +199,7 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 
         // Check on result of attack, alter enemyWaters if successful
         if (attackResults[0] == true) {
-            enemyWaters[attackCoordinates[0]][attackCoordinates[1]].hit();
+            Ship.hit();
 
             // Display attack was successful
             displayMessage ("We sunk an enemy ship!");

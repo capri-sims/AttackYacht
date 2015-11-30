@@ -17,17 +17,13 @@ import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.DataInputStream;
@@ -40,20 +36,38 @@ import java.util.ArrayList;
 
 public class ConnectActivity extends AppCompatActivity implements View.OnClickListener,   android.content.DialogInterface.OnClickListener, WifiP2pManager.ConnectionInfoListener {
 
+    public static final String TAG = "YOUR-TAG-NAME";
+    public static String outputText;
+    public ArrayAdapter mAdapter;
+    int flag = 0;
     private WifiP2pManager mManager;
     private WifiP2pManager.Channel mChannel;
     private BroadcastReceiver mReceiver;
     private IntentFilter mIntentFilter;
     private Button mDiscover;
-    public ArrayAdapter mAdapter;
     private ArrayList<WifiP2pDevice> mDeviceList = new ArrayList<WifiP2pDevice>();
-    public static final String TAG = "YOUR-TAG-NAME";
     private String m_Text = "";
-    public static String outputText;
 
-    int flag = 0;
+    public static boolean copyFile(InputStream inputStream, OutputStream out) {
+        byte buf[] = new byte[1024];
+        int len;
+        long startTime = System.currentTimeMillis();
 
+        try {
+            while ((len = inputStream.read(buf)) != -1) {
+                out.write(buf, 0, len);
+            }
+            out.close();
+            inputStream.close();
+            long endTime = System.currentTimeMillis() - startTime;
+            Log.v("", "Time taken to transfer all bytes is : " + endTime);
 
+        } catch (IOException e) {
+            Log.d("exp", e.toString());
+            return false;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +86,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
                 //give bluetooth the selected device
                 //if successful
 
-                Intent intent = new Intent(ConnectActivity.this, SetupActivity.class);
+                Intent intent = new Intent(ConnectActivity.this, P1SetupActivity.class);
                 startActivity(intent);
                 //else... try again
             }
@@ -97,6 +111,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
     //i did not add this
     public void onClickConnect(View v){
 
@@ -109,81 +124,16 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         registerReceiver(mReceiver, mIntentFilter);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(mReceiver);
-    }
-
 //    @Override //NO MENU
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.menu_main, menu);
 //        return true;
 //    }
 
-    private class WiFiDirectReceiver extends BroadcastReceiver {
-
-        private WifiP2pManager mManager;
-        private WifiP2pManager.Channel mChannel;
-        private ConnectActivity mActivity;
-
-        public WiFiDirectReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel, ConnectActivity activity) {
-            super();
-            mManager = manager;
-            mChannel = channel;
-            mActivity = activity;
-        }
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
-
-                int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
-                if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {
-                    String title = "ANDROID_ID[" + getAndroid_ID() + "]";
-                    title += "   MAC[" + getMACAddress() + "]";
-                    Toast.makeText(mActivity, "Wi-Fi Direct is enabled." + title, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(mActivity, "Wi-Fi Direct is disabled.", Toast.LENGTH_SHORT).show();
-                }
-
-            } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
-
-                if (mManager != null) {
-                    mManager.requestPeers(mChannel, new WifiP2pManager.PeerListListener() {
-
-                        @Override
-                        public void onPeersAvailable(WifiP2pDeviceList peers) {
-                            if (peers != null) {
-                                mDeviceList.addAll(peers.getDeviceList());
-                                ArrayList<String> deviceNames = new ArrayList<String>();
-                                for (WifiP2pDevice device : mDeviceList) {
-                                    deviceNames.add(device.deviceName);
-                                }
-                                if (deviceNames.size() > 0) {
-                                    mAdapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_list_item_1, deviceNames);
-                                    if (flag == 0) {
-                                        flag = 1;
-                                        showDeviceListDialog();
-                                    }
-                                } else {
-                                    Toast.makeText(mActivity, "Device list is empty.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-                    });
-                }
-
-            } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
-
-
-            } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
-
-            }
-        }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -209,7 +159,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
 
                 //TAKE THIS OUT LATER
                 //THIS ALLOWS THE APP TO MOVE FORWARD FOR TESTING
-                Intent intent = new Intent(ConnectActivity.this, SetupActivity.class);
+                Intent intent = new Intent(ConnectActivity.this, P1SetupActivity.class);
                 startActivity(intent);
                 ///////////////////
             }
@@ -227,28 +177,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
 
     public String getInfo(){
         return outputText;
-    }
-
-
-    private class DeviceListDialog extends DialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Select a device")
-                    .setSingleChoiceItems(mAdapter, 0, ConnectActivity.this)
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-
-                    });
-
-            return builder.create();
-        }
-
     }
 
     @Override
@@ -328,6 +256,100 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         startService(serviceIntent);
     }
 
+    @Override
+    public void onConnectionInfoAvailable(WifiP2pInfo info) {
+        // TODO Auto-generated method stub
+
+        Toast.makeText(getApplicationContext(), "connectioninfoo", Toast.LENGTH_LONG).show();
+
+    }
+
+    private class WiFiDirectReceiver extends BroadcastReceiver {
+
+        private WifiP2pManager mManager;
+        private WifiP2pManager.Channel mChannel;
+        private ConnectActivity mActivity;
+
+        public WiFiDirectReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel, ConnectActivity activity) {
+            super();
+            mManager = manager;
+            mChannel = channel;
+            mActivity = activity;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
+
+                int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
+                if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {
+                    String title = "ANDROID_ID[" + getAndroid_ID() + "]";
+                    title += "   MAC[" + getMACAddress() + "]";
+                    Toast.makeText(mActivity, "Wi-Fi Direct is enabled." + title, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mActivity, "Wi-Fi Direct is disabled.", Toast.LENGTH_SHORT).show();
+                }
+
+            } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+
+                if (mManager != null) {
+                    mManager.requestPeers(mChannel, new WifiP2pManager.PeerListListener() {
+
+                        @Override
+                        public void onPeersAvailable(WifiP2pDeviceList peers) {
+                            if (peers != null) {
+                                mDeviceList.addAll(peers.getDeviceList());
+                                ArrayList<String> deviceNames = new ArrayList<String>();
+                                for (WifiP2pDevice device : mDeviceList) {
+                                    deviceNames.add(device.deviceName);
+                                }
+                                if (deviceNames.size() > 0) {
+                                    mAdapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_list_item_1, deviceNames);
+                                    if (flag == 0) {
+                                        flag = 1;
+                                        showDeviceListDialog();
+                                    }
+                                } else {
+                                    Toast.makeText(mActivity, "Device list is empty.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    });
+                }
+
+            } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+
+
+            } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
+
+            }
+        }
+
+    }
+
+    private class DeviceListDialog extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Select a device")
+                    .setSingleChoiceItems(mAdapter, 0, ConnectActivity.this)
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+            return builder.create();
+        }
+
+    }
+
     /**
      * A simple server socket that accepts connection and writes some data on
      * the stream.
@@ -383,7 +405,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();;
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                 outputText = result;
             }
 
@@ -403,35 +425,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         protected void onPreExecute() {
 
         }
-
-    }
-
-    public static boolean copyFile(InputStream inputStream, OutputStream out) {
-        byte buf[] = new byte[1024];
-        int len;
-        long startTime = System.currentTimeMillis();
-
-        try {
-            while ((len = inputStream.read(buf)) != -1) {
-                out.write(buf, 0, len);
-            }
-            out.close();
-            inputStream.close();
-            long endTime = System.currentTimeMillis() - startTime;
-            Log.v("", "Time taken to transfer all bytes is : " + endTime);
-
-        } catch (IOException e) {
-            Log.d("exp", e.toString());
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void onConnectionInfoAvailable(WifiP2pInfo info) {
-        // TODO Auto-generated method stub
-
-        Toast.makeText(getApplicationContext(), "connectioninfoo", Toast.LENGTH_LONG).show();
 
     }
 }

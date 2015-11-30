@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 //        startService(music);
 
         //BUTTONS//
-        Button buttonTwoPlayer = (Button) findViewById(R.id.button_menu_twoPlayer);
+        Button buttonTwoPlayer = (Button) findViewById(R.id.button_wifi);
         buttonTwoPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ConnectActivity.class);

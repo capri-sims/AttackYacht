@@ -32,21 +32,15 @@ package group5.attackyacht;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
 
-public class PlayTheirTurnActivity extends AppCompatActivity
+public class P2TurnActivity extends AppCompatActivity
 {
+    static boolean firstRun = true; // Turn tracking? no
     static private int ROW = 7;
     static private int COL = 12;
-    static boolean firstRun = true; // Turn tracking? no
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];  // 2D array tracking opponent player ships & their status
 
 /*
@@ -74,7 +68,7 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         // Only run on first run
         if (firstRun){
             // Get friendlyWaters from the setup screen
-            friendlyWaters = SetupActivity.getFriendlyWaters();
+            friendlyWaters = P1SetupActivity.getFriendlyWaters();
             firstRun = false;
         }
 
@@ -149,7 +143,7 @@ public class PlayTheirTurnActivity extends AppCompatActivity
             for (int indexX = 0; indexX < friendlyWaters [indexX].length; indexX++)
             {
                 // If there is anything other than destroyed or ship_water type pieces, the game continues
-                if ((friendlyWaters[indexY][indexX]).getType() != "destroyed" || (friendlyWaters[indexY][indexX]).getType() != "water")
+                if (((friendlyWaters[indexY][indexX]).getType()).equals("destroyed") || ((friendlyWaters[indexY][indexX]).getType()).equals("water"))
                 {
                     endStatus = false;
                     return endStatus;
@@ -187,7 +181,7 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         Boolean attackResults [] = new Boolean [2];
 
         // Check if attack was successful
-        attackResults [0] = friendlyWaters [attackCoordinates [0]][attackCoordinates [1]].hit();
+        attackResults[0] = Ship.hit();
 
         // Game will continue, unless detemineEnd sets value to true
         attackResults [1] = false;
@@ -215,7 +209,7 @@ public class PlayTheirTurnActivity extends AppCompatActivity
             GameOverActivity.setVictory (false);
 
             // Switch over to gameOverActivity screen
-            Intent toGameOver = new Intent (PlayTheirTurnActivity.this, GameOverActivity.class);
+            Intent toGameOver = new Intent(P2TurnActivity.this, GameOverActivity.class);
             startActivity (toGameOver);
         }
     }
