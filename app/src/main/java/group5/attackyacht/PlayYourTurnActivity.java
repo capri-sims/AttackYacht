@@ -74,11 +74,10 @@ public class PlayYourTurnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_your_turn);
 
-        TableLayout table = (TableLayout) findViewById(R.id.shipSetupGrid);
-
         if(firstRun){
+            TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
             for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
-                TableRow row = new TableRow(this);
+                TableRow row = new TableRow(PlayYourTurnActivity.this);
                 for(int j = 0; j < COL; j++){
 
                     ImageView image = new ImageView (this);
@@ -238,17 +237,22 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 */
     private void updateGrid(){ //will this override the onClickListeners???
 
-        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
-        for (int i = 0; i < ROW; i++){
-            TableRow row = new TableRow(this);
-            for (int j = 0; j < COL; j++){
-                ImageView image = new ImageView (this);
-                int imageID = getResources().getIdentifier(("ship_" + (enemyWaters[i][j]).getType()), "drawable", getPackageName());
-                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
-                image.setOnClickListener(onClick(image, i, j));
-                row.addView(image, 100, 100);
-            }
-            table.addView(row);
-        }
+//        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
+//        for (int i = 0; i < ROW; i++){
+//            TableRow row = new TableRow(this);
+//            for (int j = 0; j < COL; j++){
+//                ImageView image = new ImageView (this);
+//                int imageID = getResources().getIdentifier(("ship_" + (enemyWaters[i][j]).getType()), "drawable", getPackageName());
+//                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
+//                image.setOnClickListener(onClick(image, i, j));
+//                row.addView(image, 100, 100);
+//            }
+//            table.addView(row);
+//        }
+
+        Intent intent = getIntent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        startActivity(intent);
     }
 }

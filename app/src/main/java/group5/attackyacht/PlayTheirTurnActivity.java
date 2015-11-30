@@ -236,18 +236,24 @@ public class PlayTheirTurnActivity extends AppCompatActivity
 ********************************************************************************
 */
     private void updateGrid(){
+//
+//        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
+//        for (int i = 0; i < ROW; i++){
+//            TableRow row = new TableRow(this);
+//            for (int j = 0; j < COL; j++){
+//                ImageView image = new ImageView (this);
+//                int imageID = getResources().getIdentifier(("ship_"+(friendlyWaters[i][j]).getType()), "drawable", getPackageName());
+//                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
+//                row.addView(image, 100, 100);
+//            }
+//            table.addView(row);
+//
+//        }
 
-        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
-        for (int i = 0; i < ROW; i++){
-            TableRow row = new TableRow(this);
-            for (int j = 0; j < COL; j++){
-                ImageView image = new ImageView (this);
-                int imageID = getResources().getIdentifier(("ship_"+(friendlyWaters[i][j]).getType()), "drawable", getPackageName());
-                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
-                row.addView(image, 100, 100);
-            }
-            table.addView(row);
-        }
+        Intent intent = getIntent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        startActivity(intent);
     }
     
 }

@@ -49,7 +49,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
     private ArrayList<WifiP2pDevice> mDeviceList = new ArrayList<WifiP2pDevice>();
     public static final String TAG = "YOUR-TAG-NAME";
     private String m_Text = "";
-    public String outputText;
+    public static String outputText;
 
     int flag = 0;
 
