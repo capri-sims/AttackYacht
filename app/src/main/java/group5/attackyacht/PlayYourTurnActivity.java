@@ -99,11 +99,16 @@ public class PlayYourTurnActivity extends AppCompatActivity
         buttonFire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                // TODO: onClick; The following comments on implementation
                 //send selectedSquare to other phone (via FileTransferService?)
                 //get response
                 //display message
                 //update enemyWaters
                 //show updated array
+                
+                // processAttack should handle sending data to the other phone, getting the
+                // response, displaying the message, and updating enemyWaters, but it'd like the
+                // row / col data from selectedSquare to do so
 
                 Intent intent = new Intent(PlayYourTurnActivity.this, PlayTheirTurnActivity.class);
                 startActivity(intent);
@@ -184,25 +189,26 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 */
     public void processAttack (int attackCoordinates []) //probably better to use either Ship or ImageView
     {
-        // TODO: processAttack; SEND attackCoordinates TO OPPONENT
-        // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults FROM OPPONENT
+        // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
+        // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
+        // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
         Boolean attackResults[] = new Boolean[]{true, false};
 
         // Check on result of attack, alter enemyWaters if successful
         if (attackResults[0] == true) {
             enemyWaters[attackCoordinates[0]][attackCoordinates[1]].hit();
 
-            // TODO: processAttack; DISPLAY MESSAGE THAT ATTACK WAS SUCCESSFUL
+            // Display attack was successful
+            displayMessage ("We sunk an enemy ship!");
         } else {
-            // TODO: processAttack; DISPLAY MESSAGE THAT ATTACK MISSED
+            // Display attack was unsuccessful
+            displayMessage ("Oh no! Our attack missed!");
         }
 
         // Check if game is over, call gameOverActivity if it is
         if (attackResults[1] == true) {
             // Set player as winner
             GameOverActivity.setVictory(true);
-
-            //get info from connection service
         }
     }
 

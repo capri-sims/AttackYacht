@@ -78,8 +78,8 @@ public class PlayTheirTurnActivity extends AppCompatActivity
             firstRun = false;
         }
 
-        updateGrid();
-        // TODO: onCreate; Begin processAttack
+        updateGrid ();
+        processAttack ();
         // TODO: onCreate; Being your turn
     }
 
@@ -167,8 +167,8 @@ public class PlayTheirTurnActivity extends AppCompatActivity
 */
     public void processAttack ()
     {
-        // TODO: processAttack; RECEIVE attackCoordinates FROM OPPONENT
-        // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackCoordinates FROM OPPONENT
+        // TODO: processAttack; RECEIVE attackCoordinates[] FROM OPPONENT
+        // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackCoordinates[] FROM OPPONENT
         int attackCoordinates [] = new int [] {1, 2};
 
         // Represent status of attack: 0, if attack was successful; 1, if game is over
@@ -182,17 +182,19 @@ public class PlayTheirTurnActivity extends AppCompatActivity
 
         if (attackResults [0] == true)
         {
-            // TODO: processAttack; DISPLAY MESSAGE THAT ATTACK WAS SUCCESSFUL
+            // Display attack was successful
+            displayMessage ("Oh no! We were hit!");
 
             // Check if the game ended
             attackResults [1] = determineEnd ();
         }
         else
         {
-            // TODO: processAttack; DISPLAY MESSAGE THAT ATTACK MISSED
+            // Display attack was unsuccessful
+            displayMessage ("The enemy's attack missed!");
         }
 
-        // TODO: processAttack; SEND attackResults TO OPPONENT
+        // TODO: processAttack; SEND attackResults[] TO OPPONENT
 
         // Check if game is over, call gameOverActivity if it is
         if (attackResults [1] == true)
