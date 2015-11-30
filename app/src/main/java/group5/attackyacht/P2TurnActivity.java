@@ -353,7 +353,7 @@ public class P2TurnActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_p1_turn);
+        setContentView(R.layout.activity_p2_turn);
 
         if(firstRun){
 
@@ -362,7 +362,6 @@ public class P2TurnActivity extends AppCompatActivity
             for(int i = 0; i < ROW; i++){ //Initialize enemy waters
                 TableRow row = new TableRow(P2TurnActivity.this);
                 for(int j = 0; j < COL; j++){
-
                     ImageView image = new ImageView (this);
                     enemyWaters[i][j] = new Ship("water", i, j);
                     image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
@@ -392,7 +391,7 @@ public class P2TurnActivity extends AppCompatActivity
                 // response, displaying the message, and updating enemyWaters, but it'd like the
                 // row / col data from selectedSquare to do so
 
-                Intent intent = new Intent(P2TurnActivity.this, P2TurnActivity.class);
+                Intent intent = new Intent(P2TurnActivity.this, P1TurnActivity.class);
                 startActivity(intent);
             }
         });
