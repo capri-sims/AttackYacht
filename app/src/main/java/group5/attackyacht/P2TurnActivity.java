@@ -353,7 +353,7 @@ public class P2TurnActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_your_turn);
+        setContentView(R.layout.activity_play_their_turn);
 
         if(firstRun){
 
@@ -377,7 +377,7 @@ public class P2TurnActivity extends AppCompatActivity
 
         updateGrid();
 
-        Button buttonFire = (Button) findViewById(R.id.button_fire);
+        Button buttonFire = (Button) findViewById(R.id.button_fireP2);
         buttonFire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
