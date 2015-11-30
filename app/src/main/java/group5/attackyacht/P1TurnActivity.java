@@ -76,6 +76,8 @@ public class P1TurnActivity extends AppCompatActivity
         setContentView(R.layout.activity_play_your_turn);
 
         if(firstRun){
+
+            //creates the 2D array
             TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
             for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
                 TableRow row = new TableRow(P1TurnActivity.this);
