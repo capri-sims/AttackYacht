@@ -93,9 +93,9 @@ public class P1TurnActivity extends AppCompatActivity
             firstRun = false;
         }
 
-        updateGrid();
+        //updateGrid();
 
-        Button buttonFire = (Button) findViewById(R.id.button_fire);
+        Button buttonFire = (Button) findViewById(R.id.button_fireP1);
         buttonFire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

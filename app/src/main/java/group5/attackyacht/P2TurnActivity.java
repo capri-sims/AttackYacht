@@ -34,6 +34,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class P2TurnActivity extends AppCompatActivity
@@ -72,7 +74,7 @@ public class P2TurnActivity extends AppCompatActivity
             firstRun = false;
         }
 
-        updateGrid();
+        //updateGrid();
         // TODO: onCreate; Begin processAttack
         // TODO: onCreate; Being your turn - ??
 
@@ -86,6 +88,17 @@ public class P2TurnActivity extends AppCompatActivity
         updateGrid ();
         processAttack ();
         // TODO: onCreate; Being your turn
+
+        Button buttonFire = (Button) findViewById(R.id.button_fireP2);
+        buttonFire.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                //process Attack
+                //Display Message
+                Intent intent = new Intent(P2TurnActivity.this, P1TurnActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -189,7 +202,7 @@ public class P2TurnActivity extends AppCompatActivity
         if (attackResults [0] == true)
         {
             // Display attack was successful
-            displayMessage ("Oh no! We were hit!");
+            displayMessage ("Oh no! We were hit!"); //TODO: Fix weird bug
 
             // Check if the game ended
             attackResults [1] = determineEnd ();

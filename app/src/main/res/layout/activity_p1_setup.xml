@@ -10,10 +10,10 @@
     tools:context="group5.attackyacht.P1SetupActivity">
 
     <TableLayout
-        android:id="@+id/shipSetupGrid"
+        android:id="@+id/shipSetupGridP1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_ready"
+        android:layout_above="@+id/button_readyP1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
@@ -22,7 +22,7 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/button_ready"
+        android:id="@+id/button_readyP1"
         android:layout_width="151dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

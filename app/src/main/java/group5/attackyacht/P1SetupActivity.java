@@ -33,34 +33,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
-import java.util.Random;
-
 public class P1SetupActivity extends AppCompatActivity {
 
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
-    private ConnectActivity connection = new ConnectActivity();
+    //private ConnectActivity connection = new ConnectActivity();
 
-    /*
-********************************************************************************
-*** getFriendlyWaters
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Returns friendlyWaters
-*** Inputs:
-*** n/a
-*** Outputs:
-*** ship [][] friendlyWaters
-********************************************************************************
-*** Date
-*** 11/23/15
-********************************************************************************
-*/
-    static public Ship[][] getFriendlyWaters() {
-        return friendlyWaters;
-    }
 
 /*
 ********************************************************************************
@@ -81,9 +60,9 @@ public class P1SetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup);
+        setContentView(R.layout.activity_p1_setup);
 
-        TableLayout table = (TableLayout) findViewById(R.id.shipSetupGrid);
+        TableLayout table = (TableLayout) findViewById(R.id.shipSetupGridP1);
         for (int i = 0; i < ROW; i++){
             TableRow row = new TableRow(this);
             for (int j = 0; j < COL; j++){
@@ -98,23 +77,28 @@ public class P1SetupActivity extends AppCompatActivity {
             table.addView(row);
         }
 
-        Button buttonReady = (Button) findViewById(R.id.button_ready);
+        Button buttonReady = (Button) findViewById(R.id.button_readyP1);
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 // Determine who goes first
-                boolean firstTurn = determineFirst();
-                Intent goToYourTurn = new Intent(P1SetupActivity.this, P1TurnActivity.class);
-                Intent goToTheirTurn = new Intent(P1SetupActivity.this, P2TurnActivity.class);
+//                boolean firstTurn = determineFirst();
+//                Intent goToYourTurn = new Intent(P1SetupActivity.this, P1TurnActivity.class);
+//                Intent goToTheirTurn = new Intent(P1SetupActivity.this, P2TurnActivity.class);
+//
+//                if (firstTurn)
+//                {
+//                    startActivity (goToYourTurn);
+//                }
+//                else
+//                {
+//                    startActivity (goToTheirTurn);
+//                }
 
-                if (firstTurn)
-                {
-                    startActivity (goToYourTurn);
-                }
-                else
-                {
-                    startActivity (goToTheirTurn);
-                }
+
+                //TODO: Show dialog box for next player
+                Intent intent = new Intent(P1SetupActivity.this, P2SetupActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -216,7 +200,7 @@ public class P1SetupActivity extends AppCompatActivity {
 
 /*
 ********************************************************************************
-*** determineFirst
+*** determineFirst - DON"T NEED ANYMORE
 *** Group 5
 ********************************************************************************
 *** Purpose:
@@ -230,49 +214,49 @@ public class P1SetupActivity extends AppCompatActivity {
 *** 11/27/15
 ********************************************************************************
 */
-    public Boolean determineFirst ()
-    {
-        // True, player goes first; False, opponent goes first
-        Boolean firstTurn = null;
-
-
-        // Generate an int between 0 & 5, compare w/ opponent, larger number goes
-        // first. Repeat on equal value.
-        Random randGenerator = new Random ();
-
-        // Loop until the firstTurn is determined
-        while (firstTurn == null)
-        {
-            displayMessage("In determineFirst");
-            int yourRandValue = 3;//randGenerator.nextInt(5);
-            //TODO: send yourRandValue
-            //connection.sendInfo(String.valueOf(yourRandValue));
-
-
-
-            // SEND / RECEIVE # TO / FROM OPPONENT
-            // PLACEHOLDER FOR VALUE TO BE RECEIVED
-            //TODO : get theirRandValue
-            int theirRandValue = 2;
-            //int theirRandValue = Integer.parseInt(connection.getInfo());
-
-            if (yourRandValue > theirRandValue)
-            {
-                firstTurn = true;
-            }
-            else if (yourRandValue < theirRandValue)
-            {
-                firstTurn = false;
-            }
-
-        }
-        //TODO: Needs to communicate with other phone (via fileTrasferServie?)
-        //connection.sendInfo(String.valueOf(firstTurn);
-
-        return firstTurn;
-
-
-    }
+//    public Boolean determineFirst ()
+//    {
+//        // True, player goes first; False, opponent goes first
+//        Boolean firstTurn = null;
+//
+//
+//        // Generate an int between 0 & 5, compare w/ opponent, larger number goes
+//        // first. Repeat on equal value.
+//        Random randGenerator = new Random ();
+//
+//        // Loop until the firstTurn is determined
+//        while (firstTurn == null)
+//        {
+//            displayMessage("In determineFirst");
+//            int yourRandValue = 3;//randGenerator.nextInt(5);
+//            //TODO: send yourRandValue
+//            //connection.sendInfo(String.valueOf(yourRandValue));
+//
+//
+//
+//            // SEND / RECEIVE # TO / FROM OPPONENT
+//            // PLACEHOLDER FOR VALUE TO BE RECEIVED
+//            //TODO : get theirRandValue
+//            int theirRandValue = 2;
+//            //int theirRandValue = Integer.parseInt(connection.getInfo());
+//
+//            if (yourRandValue > theirRandValue)
+//            {
+//                firstTurn = true;
+//            }
+//            else if (yourRandValue < theirRandValue)
+//            {
+//                firstTurn = false;
+//            }
+//
+//        }
+//        //TODO: Needs to communicate with other phone (via fileTrasferServie?)
+//        //connection.sendInfo(String.valueOf(firstTurn);
+//
+//        return firstTurn;
+//
+//
+//    }
 
 /*
 ********************************************************************************
@@ -299,5 +283,25 @@ public class P1SetupActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, message, duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    /*
+********************************************************************************
+*** getFriendlyWaters
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Returns friendlyWaters
+*** Inputs:
+*** n/a
+*** Outputs:
+*** ship [][] friendlyWaters
+********************************************************************************
+*** Date
+*** 11/23/15
+********************************************************************************
+*/
+    static public Ship[][] getFriendlyWaters() {
+        return friendlyWaters;
     }
 }
