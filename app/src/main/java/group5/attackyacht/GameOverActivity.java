@@ -58,23 +58,29 @@ public class GameOverActivity extends AppCompatActivity {
 
         // button to return to main menu.
         Button buttonMenu = (Button)findViewById(R.id.button_menu);
-        buttonMenu.setOnClickListener((v) -> {
-            Intent intent = new Intent(GameOverActivity.this,MainActivity.class);
-            startActivity(intent);
+        buttonMenu.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(GameOverActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
         });
 
         // button to play again
         Button buttonAgain = (Button) findViewById(R.id.button_again);
-        buttonAgain.setOnClickListener((v) -> {
-            Intent intent = new Intent(GameOverActivity.this,SetupActivity.class);
-            startActivity(intent);
+        buttonAgain.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(GameOverActivity.this,SetupActivity.class);
+                startActivity(intent);
+            }
         });
 
         // button to exit
         Button buttonExit = (Button)findViewById(R.id.button_exit);
-        buttonExit.setOnClickListener((v)-> {
-            finish();
-            System.exit(0);
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
         });
     }
 

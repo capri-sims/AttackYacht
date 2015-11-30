@@ -22,18 +22,15 @@ package group5.attackyacht;
 // Imported libraries
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
+
 import java.util.Random;
 
 public class SetupActivity extends AppCompatActivity {
@@ -69,7 +66,7 @@ public class SetupActivity extends AppCompatActivity {
             for (int j = 0; j < COL; j++){
                 ImageView image = new ImageView (this);
                 friendlyWaters[i][j] = new Ship("water", i, j);
-                image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.water));
+                image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
                 //image.setBackgroundColor(Color.BLUE);
                 //image.setId(i + j);
                 row.addView(image, 100, 100);
@@ -144,45 +141,45 @@ public class SetupActivity extends AppCompatActivity {
                     boolean b = false, a = false, l = false, r = false;
 
                     if(!(below.equalsIgnoreCase("water"))){
-                        friendlyWaters[row-1][col].setType("ship_top");
-                        friendlyWaters[row][col].setType("ship_bottom");
+                        friendlyWaters[row-1][col].setType("top");
+                        friendlyWaters[row][col].setType("bottom");
                         b = true;
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_bottom));
                     }
                     if(!(above.equalsIgnoreCase("water"))){
-                        friendlyWaters[row+1][col].setType("ship_bottom");
-                        friendlyWaters[row][col].setType("ship_top");
+                        friendlyWaters[row+1][col].setType("bottom");
+                        friendlyWaters[row][col].setType("top");
                         a = true;
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_top));
                     }
                     if(!(left.equalsIgnoreCase("water"))){
-                        friendlyWaters[row][col-1].setType("ship_left");
-                        friendlyWaters[row][col].setType("ship_right");
+                        friendlyWaters[row][col-1].setType("left");
+                        friendlyWaters[row][col].setType("right");
                         l = true;
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_right));
                     }
                     if(!(right.equalsIgnoreCase("water"))){
-                        friendlyWaters[row][col+1].setType("ship_right");
-                        friendlyWaters[row][col].setType("ship_left");
+                        friendlyWaters[row][col+1].setType("right");
+                        friendlyWaters[row][col].setType("left");
                         r = true;
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_left));
                     }
                     if(b & a){
-                        friendlyWaters[row][col].setType("ship_middle_v");
+                        friendlyWaters[row][col].setType("middle_v");
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_middle_v));
                     }
                     if(l & r){
-                        friendlyWaters[row][col].setType("ship_middle_h");
+                        friendlyWaters[row][col].setType("middle_h");
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_middle_h));
                     }
                     if((!b) & (!a) & (!l) & (!r)){
                         im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_one)); //NOT SHOWING
-                        friendlyWaters[row][col].setType("ship_one");
+                        friendlyWaters[row][col].setType("one");
                     }
                 }
                 else {
                     //v.setBackgroundColor(Color.BLUE);
-                    im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.water)); //???
+                    im.setImageDrawable(ContextCompat.getDrawable(SetupActivity.this, R.drawable.ship_water)); //???
                     friendlyWaters[row][col].setType("water");
 
                 }

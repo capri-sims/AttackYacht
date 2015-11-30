@@ -78,6 +78,17 @@ public class PlayTheirTurnActivity extends AppCompatActivity
             firstRun = false;
         }
 
+        updateGrid();
+        // TODO: onCreate; Begin processAttack
+        // TODO: onCreate; Being your turn - ??
+
+        //wait to get hit
+        //from bluetooth
+        //update ship array
+        //display message
+        //determine end
+        //open your turn
+
         updateGrid ();
         processAttack ();
         // TODO: onCreate; Being your turn
@@ -132,18 +143,19 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         // Represents end status of game: True, game over; False, game continues
         Boolean endStatus = true;
 
-            // Traverse friendlyWaters to check if player lost
-            for (int indexY = 0; indexY < friendlyWaters.length; indexY++)
+        // Traverse friendlyWaters to check if player lost
+        for (int indexY = 0; indexY < friendlyWaters.length; indexY++) //TODO: should we use ROW & COL?
+        {
+            for (int indexX = 0; indexX < friendlyWaters [indexX].length; indexX++)
             {
-                for (int indexX = 0; indexX < friendlyWaters [indexX].length; indexX++)
+                // If there is anything other than destroyed or ship_water type pieces, the game continues
+                if ((friendlyWaters[indexY][indexX]).getType() != "destroyed" || (friendlyWaters[indexY][indexX]).getType() != "water")
                 {
-                    // If there is anything other than destroyed or water type pieces, the game continues
-                    if (friendlyWaters [indexY][indexX].getType () != "destroyed" || friendlyWaters [indexY][indexX].getType () != "water")
-                    {
-                        endStatus = false;
-                    }
+                    endStatus = false;
+                    return endStatus;
                 }
             }
+        }
 
         return endStatus;
     }
@@ -208,34 +220,34 @@ public class PlayTheirTurnActivity extends AppCompatActivity
         }
     }
 
-/*
+    /*
 ********************************************************************************
 *** updateGrid
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Updates the graphics displayed within the on screen grid
-*** Inputs:
-*** n/a
+*** updates the grid.
+*** Inputs: none
 *** Outputs:
-*** n/a
+*** none
 ********************************************************************************
 *** Date
-*** 11/29/15
+*** 11/28/15
 ********************************************************************************
 */
-    private void updateGrid(){ //will this override the onClickListeners???
+    private void updateGrid(){
 
-        TableLayout table = (TableLayout) findViewById(R.id.friendlyWaters);
+        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
         for (int i = 0; i < ROW; i++){
             TableRow row = new TableRow(this);
             for (int j = 0; j < COL; j++){
                 ImageView image = new ImageView (this);
-                int imageID = getResources().getIdentifier((friendlyWaters[i][j]).getType(), "drawable", getPackageName());
+                int imageID = getResources().getIdentifier(("ship_"+(friendlyWaters[i][j]).getType()), "drawable", getPackageName());
                 image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
                 row.addView(image, 100, 100);
             }
             table.addView(row);
         }
     }
+    
 }

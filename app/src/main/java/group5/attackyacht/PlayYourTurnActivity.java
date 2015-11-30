@@ -83,7 +83,7 @@ public class PlayYourTurnActivity extends AppCompatActivity
 
                     ImageView image = new ImageView (this);
                     enemyWaters[i][j] = new Ship("water", i, j);
-                    image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.water));
+                    image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
                     row.addView(image, 100, 100);
                     image.setOnClickListener(onClick(image, i, j));
 
@@ -122,7 +122,7 @@ public class PlayYourTurnActivity extends AppCompatActivity
 *** Group 5
 ********************************************************************************
 *** Purpose:
-***
+*** Displays the game screen, initializes enemyWaters, and continues game loop
 *** Inputs:
 *** final ImageView im, final int row, final int col
 *** Outputs:
@@ -186,6 +186,10 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** Date
 *** 11/25/15
 ********************************************************************************
+*** Change Log:
+*** 11/28/15 - CS - Added the messages
+*** 11/28/15 - CS - updateGrid() added
+********************************************************************************
 */
     public void processAttack (int attackCoordinates []) //probably better to use either Ship or ImageView
     {
@@ -205,10 +209,14 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
             displayMessage ("Oh no! Our attack missed!");
         }
 
+        updateGrid();
+
         // Check if game is over, call gameOverActivity if it is
         if (attackResults[1] == true) {
             // Set player as winner
             GameOverActivity.setVictory(true);
+
+            //get info from connection service
         }
     }
 
@@ -235,7 +243,7 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
             TableRow row = new TableRow(this);
             for (int j = 0; j < COL; j++){
                 ImageView image = new ImageView (this);
-                int imageID = getResources().getIdentifier((enemyWaters[i][j]).getType(), "drawable", getPackageName());
+                int imageID = getResources().getIdentifier(("ship_" + (enemyWaters[i][j]).getType()), "drawable", getPackageName());
                 image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
                 image.setOnClickListener(onClick(image, i, j));
                 row.addView(image, 100, 100);
