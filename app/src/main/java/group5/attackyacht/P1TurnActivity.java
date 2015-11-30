@@ -115,7 +115,7 @@ public class P1TurnActivity extends AppCompatActivity
                 // processAttack should handle sending data to the other phone, getting the
                 // response, displaying the message, and updating enemyWaters, but it'd like the
                 // row / col data from selectedSquare to do so
-
+                processAttack(fireRow, fireCol);
                 Intent intent = new Intent(P1TurnActivity.this, P2TurnActivity.class);
                 startActivity(intent);
 
@@ -147,7 +147,7 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
             fireRow = row;
             fireCol = col;
             TextView firePos = (TextView) findViewById(R.id.firePosition);
-            firePos.setText("Firing at " + col+1 + ", " + row+1);
+            firePos.setText("Firing at " + (fireCol+1) + ", " + (fireRow+1));
         }
     };
 }
@@ -201,12 +201,21 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** 11/28/15 - CS - updateGrid() added
 ********************************************************************************
 */
-    public void processAttack (int attackCoordinates []) //probably better to use either Ship or ImageView
+    public void processAttack (int posCol, int posRow) //probably better to use either Ship or ImageView
     {
         // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
         // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
         // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
         Boolean attackResults[] = new Boolean[]{true, false};
+
+        if((enemyWaters[posRow][posCol]).getType() != "water" || (enemyWaters[posRow][posCol]).getType() != "destroyed")
+        {
+            Toast.makeText(getApplicationContext(), (enemyWaters[posRow][posCol]).getType(), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "GG FGT", Toast.LENGTH_SHORT).show();
+        }
+
 
         // Check on result of attack, alter enemyWaters if successful
         if (attackResults[0] == true) {
