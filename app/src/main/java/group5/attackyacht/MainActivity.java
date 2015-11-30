@@ -78,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //////
+        Button button_local = (Button) findViewById(R.id.button_local);
+        button_local.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, P1SetupActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
