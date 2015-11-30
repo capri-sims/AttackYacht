@@ -54,10 +54,18 @@ public class MainActivity extends AppCompatActivity {
 //        startService(music);
 
         //BUTTONS//
-        Button buttonTwoPlayer = (Button) findViewById(R.id.button_wifi);
-        buttonTwoPlayer.setOnClickListener(new View.OnClickListener() {
+        Button buttonLocal = (Button) findViewById(R.id.button_local);
+        buttonLocal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ConnectActivity.class);
+                Intent intent = new Intent(MainActivity.this,P1SetupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button buttonWifi = (Button) findViewById(R.id.button_wifi);
+        buttonWifi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WifiActivity.class);
                 startActivity(intent);
             }
         });

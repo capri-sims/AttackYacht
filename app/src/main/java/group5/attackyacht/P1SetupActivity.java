@@ -141,7 +141,7 @@ public class P1SetupActivity extends AppCompatActivity {
                 //ColorDrawable drawable = (ColorDrawable) v.getBackground();
 
                 ImageView im = (ImageView) v;
-                displayMessage("In onClick!");
+
 
                 String type = (friendlyWaters[row][col]).getType();
                 String left, right, above, below;
