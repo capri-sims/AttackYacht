@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="group5.attackyacht.P2SetupActivity"
-    android:background="#929292">
+    android:background="@drawable/menuart">
 
     <Button
         android:layout_width="wrap_content"
@@ -33,6 +33,7 @@
         android:id="@+id/textView3"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#000000" />
 
 </RelativeLayout>
