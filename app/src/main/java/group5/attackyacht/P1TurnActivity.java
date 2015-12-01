@@ -184,15 +184,13 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** 11/28/15 - CS - updateGrid() added
 ********************************************************************************
 */
-    public void processAttack (int posCol, int posRow)
+    public void processAttack (int posRow,int posCol)
     {
         // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
         // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
         // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
         //Boolean attackResults[] = new Boolean[]{true, false};
 
-        //not saying the miss output //it was backwards
-        //TODO: ERROR IS HERE - ARRAY OUT OF BOUNDS
         if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
             displayMessage("MISS");

@@ -181,14 +181,13 @@ public class P2TurnActivity extends AppCompatActivity
     *** 11/28/15 - CS - updateGrid() added
     ********************************************************************************
     */
-    public void processAttack (int posCol, int posRow)
+    public void processAttack (int posRow,int posCol)
     {
         // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
         // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
         // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
         //Boolean attackResults[] = new Boolean[]{true, false};
 
-        //TODO: ERROR IS HERE - ARRAY OUT OF BOUNDS
         if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
             displayMessage("MISS");

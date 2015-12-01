@@ -18,6 +18,19 @@
 // Project Package
 package group5.attackyacht;
 
+/*
+import android.app.Service;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Environment;
+import android.os.IBinder;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
+
+import java.io.IOException;
+*/
+
 public class MusicService { //extends Service {
     public MusicService() {
     }
