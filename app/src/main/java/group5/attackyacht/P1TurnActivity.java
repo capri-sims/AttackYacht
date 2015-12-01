@@ -132,8 +132,6 @@ public class P1TurnActivity extends AppCompatActivity
         TextView numP1Ships = (TextView) findViewById(R.id.myP1Ships);
         numP1Ships.setText(mynumText);
 
-        //updateGrid();
-
         // Button to accept grid choice and attack
         Button buttonFire = (Button) findViewById(R.id.button_fireP1);
         buttonFire.setOnClickListener(new View.OnClickListener() {
@@ -244,8 +242,6 @@ public class P1TurnActivity extends AppCompatActivity
             (enemyWaters[posRow][posCol]).hit();
         }
 
-        // updateGrid ();
-
         // Handles end of game
         if(isItOver()){
             GameOverActivity.setWinner("Player 1");
@@ -256,44 +252,6 @@ public class P1TurnActivity extends AppCompatActivity
             Intent intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
             startActivity(intent);
         }
-    }
-
-/*
-********************************************************************************
-*** updateGrid
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Updates the graphics displayed within the on screen grid
-*** Inputs:
-*** n/a
-*** Outputs:
-*** n/a
-********************************************************************************
-*** Date
-*** 11/27/15
-********************************************************************************
-*/
-
-    private void updateGrid(){ //will this override the onClickListeners???
-
-//        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
-//        for (int i = 0; i < ROW; i++){
-//            TableRow row = new TableRow(this);
-//            for (int j = 0; j < COL; j++){
-//                ImageView image = new ImageView (this);
-//                int imageID = getResources().getIdentifier(("ship_" + (enemyWaters[i][j]).getType()), "drawable", getPackageName());
-//                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
-//                image.setOnClickListener(onClick(image, i, j));
-//                row.addView(image, 100, 100);
-//            }
-//            table.addView(row);
-//        }
-
-        Intent intent = getIntent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        startActivity(intent);
     }
 
 /*

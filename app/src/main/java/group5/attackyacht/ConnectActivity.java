@@ -77,6 +77,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         //start bluetooth
         //get devices
         //populate listview
+        //modified version of the wifi direct demo from android
 
 
         //BUTTONS//

@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-***
+*** Displays the main menu and gives the player options to start a game or
+*** alter their settings
 *** Inputs:
 *** Bundle savedInstanceState
 *** Outputs:
@@ -87,19 +88,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
-//    public void onClickTwoPlayer(View v){
-//        Intent intent = new Intent(this, ConnectActivity.class);
-//        startActivity(intent);
-//    }
-//
-//    public void onClickOptions(View v){
-//        //blah
-//
-//    }
-
-
-
-
 }
