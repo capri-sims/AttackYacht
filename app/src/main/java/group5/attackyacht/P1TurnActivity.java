@@ -78,7 +78,6 @@ public class P1TurnActivity extends AppCompatActivity
 */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p1_turn);
 
