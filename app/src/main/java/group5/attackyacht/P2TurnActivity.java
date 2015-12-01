@@ -480,7 +480,7 @@ public class P2TurnActivity extends AppCompatActivity
 
         // Check on result of attack, alter enemyWaters if successful
         if (attackResults[0] == true) {
-            Ship.hit();
+            //Ship.hit();
 
             // Display attack was successful
             displayMessage ("We sunk an enemy ship!");

@@ -26,10 +26,10 @@ package group5.attackyacht;
 
 public class Ship {
 
-    private static String type; //type must correspond to the image to be displayed
+    private String type; //type must correspond to the image to be displayed
     //Valid types: ship_water, destroyed, ship_bottom, ship_top, ship_middle_h, ship_middle_v, ship_left, ship_right
-    private static int health;
-    private static boolean hit;
+    private int health;
+    private boolean hit;
     private int row;
     private int col;
 
@@ -73,10 +73,10 @@ public class Ship {
 *** 11/21/15
 ********************************************************************************
 */
-    public static boolean hit(){
+    public boolean hit(){
         hit = true;
 
-        if(type == "ship_water"){
+        if(type == "water"){
             return false;
         }
         else{

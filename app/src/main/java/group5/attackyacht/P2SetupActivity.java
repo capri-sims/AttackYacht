@@ -18,6 +18,8 @@ public class P2SetupActivity extends AppCompatActivity {
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
+    private int pieceLimit = 15;
+    static private int numPieces = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,15 @@ public class P2SetupActivity extends AppCompatActivity {
             TableRow row = new TableRow(this);
             for (int j = 0; j < COL; j++){
                 ImageView image = new ImageView (this);
-                friendlyWaters[i][j] = new Ship("water", i, j);
-                image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
-                //image.setBackgroundColor(Color.BLUE);
-                //image.setId(i + j);
+                int imageID;
+                if(friendlyWaters[i][j] == null){
+                    friendlyWaters[i][j] = new Ship("water", i, j);
+                    imageID = getResources().getIdentifier("ship_water", "drawable", getPackageName());
+                }
+                else{
+                    imageID = getResources().getIdentifier(("ship_" + (friendlyWaters[i][j]).getType()), "drawable", getPackageName());
+                }
+                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
                 row.addView(image, 100, 100);
                 image.setOnClickListener(onClick(image, i, j));
             }
@@ -69,17 +76,18 @@ public class P2SetupActivity extends AppCompatActivity {
     View.OnClickListener onClick(final ImageView im, final int row, final int col)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                //ColorDrawable drawable = (ColorDrawable) v.getBackground();
 
                 ImageView im = (ImageView) v;
-
-
                 String type = (friendlyWaters[row][col]).getType();
                 String left, right, above, below;
 
                 if(type.equalsIgnoreCase("water")){
-                    //if (drawable.getColor() == Color.BLUE) {
-                    //v.setBackgroundColor(Color.GRAY);
+
+                    if(numPieces == pieceLimit){
+                        displayMessage("Max Number of Ship Pieces = " + pieceLimit);
+                        return;
+                    }
+                    else{ numPieces++; }
 
                     if(row != 0){ below = (friendlyWaters[row - 1][col]).getType(); }
                     else{ below = "water"; }
@@ -100,28 +108,24 @@ public class P2SetupActivity extends AppCompatActivity {
                         (friendlyWaters[row][col]).setType("bottom");
                         b = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P2SetupActivity.this, R.drawable.ship_bottom));
-                        displayMessage("Below!");
                     }
                     if(!(above.equalsIgnoreCase("water"))){
                         (friendlyWaters[row+1][col]).setType("bottom");
                         (friendlyWaters[row][col]).setType("top");
                         a = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P2SetupActivity.this, R.drawable.ship_top));
-                        displayMessage("Above!");
                     }
                     if(!(left.equalsIgnoreCase("water"))){
                         (friendlyWaters[row][col-1]).setType("left");
                         (friendlyWaters[row][col]).setType("right");
                         l = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P2SetupActivity.this, R.drawable.ship_right));
-                        displayMessage("Left!");
                     }
                     if(!(right.equalsIgnoreCase("water"))){
                         (friendlyWaters[row][col+1]).setType("right");
                         (friendlyWaters[row][col]).setType("left");
                         r = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P2SetupActivity.this, R.drawable.ship_left));
-                        displayMessage("Right!");
                     }
                     if(b & a){
                         (friendlyWaters[row][col]).setType("middle_v");
@@ -137,9 +141,9 @@ public class P2SetupActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    //v.setBackgroundColor(Color.BLUE);
                     (friendlyWaters[row][col]).setType("water");
                     im.setImageDrawable(ContextCompat.getDrawable(P2SetupActivity.this, R.drawable.ship_water));
+                    numPieces--;
                 }
             }
         };

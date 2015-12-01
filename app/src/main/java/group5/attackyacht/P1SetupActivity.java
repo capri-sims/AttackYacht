@@ -38,7 +38,8 @@ public class P1SetupActivity extends AppCompatActivity {
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
-    //private ConnectActivity connection = new ConnectActivity();
+    private int pieceLimit = 15;
+    static private int numPieces = 0;
 
 
 /*
@@ -67,10 +68,15 @@ public class P1SetupActivity extends AppCompatActivity {
             TableRow row = new TableRow(this);
             for (int j = 0; j < COL; j++){
                 ImageView image = new ImageView (this);
-                friendlyWaters[i][j] = new Ship("water", i, j);
-                image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
-                //image.setBackgroundColor(Color.BLUE);
-                //image.setId(i + j);
+                int imageID;
+                if(friendlyWaters[i][j] == null){
+                    friendlyWaters[i][j] = new Ship("water", i, j);
+                    imageID = getResources().getIdentifier("ship_water", "drawable", getPackageName());
+                }
+                else{
+                    imageID = getResources().getIdentifier(("ship_" + (friendlyWaters[i][j]).getType()), "drawable", getPackageName());
+                }
+                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
                 row.addView(image, 100, 100);
                 image.setOnClickListener(onClick(image, i, j));
             }
@@ -80,21 +86,6 @@ public class P1SetupActivity extends AppCompatActivity {
         Button buttonReady = (Button) findViewById(R.id.button_readyP1);
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                // Determine who goes first
-//                boolean firstTurn = determineFirst();
-//                Intent goToYourTurn = new Intent(P1SetupActivity.this, P1TurnActivity.class);
-//                Intent goToTheirTurn = new Intent(P1SetupActivity.this, P2TurnActivity.class);
-//
-//                if (firstTurn)
-//                {
-//                    startActivity (goToYourTurn);
-//                }
-//                else
-//                {
-//                    startActivity (goToTheirTurn);
-//                }
-
 
                 //TODO: Show dialog box for next player
                 Intent intent = new Intent(P1SetupActivity.this, P2SetupActivity.class);
@@ -122,29 +113,30 @@ public class P1SetupActivity extends AppCompatActivity {
     View.OnClickListener onClick(final ImageView im, final int row, final int col)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                //ColorDrawable drawable = (ColorDrawable) v.getBackground();
 
                 ImageView im = (ImageView) v;
-
-
                 String type = (friendlyWaters[row][col]).getType();
                 String left, right, above, below;
 
+                if(row != 0){ below = (friendlyWaters[row - 1][col]).getType(); }
+                else{ below = "water"; }
+
+                if(row != ROW-1){ above = (friendlyWaters[row + 1][col]).getType(); }
+                else{ above = "water"; }
+
+                if(col != 0){ left = (friendlyWaters[row][col - 1]).getType(); }
+                else{ left = "water"; }
+
+                if(col != COL-1){ right = (friendlyWaters[row][col + 1]).getType(); }
+                else{ right = "water"; }
+
                 if(type.equalsIgnoreCase("water")){
-                    //if (drawable.getColor() == Color.BLUE) {
-                    //v.setBackgroundColor(Color.GRAY);
 
-                    if(row != 0){ below = (friendlyWaters[row - 1][col]).getType(); }
-                    else{ below = "water"; }
-
-                    if(row != ROW-1){ above = (friendlyWaters[row + 1][col]).getType(); }
-                    else{ above = "water"; }
-
-                    if(col != 0){ left = (friendlyWaters[row][col - 1]).getType(); }
-                    else{ left = "water"; }
-
-                    if(col != COL-1){ right = (friendlyWaters[row][col + 1]).getType(); }
-                    else{ right = "water"; }
+                    if(numPieces == pieceLimit){
+                        displayMessage("Max Number of Ship Pieces = " + pieceLimit);
+                        return;
+                    }
+                    else{ numPieces++; }
 
                     boolean b = false, a = false, l = false, r = false;
 
@@ -153,28 +145,24 @@ public class P1SetupActivity extends AppCompatActivity {
                         (friendlyWaters[row][col]).setType("bottom");
                         b = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_bottom));
-                        displayMessage("Below!");
                     }
                     if(!(above.equalsIgnoreCase("water"))){
                         (friendlyWaters[row+1][col]).setType("bottom");
                         (friendlyWaters[row][col]).setType("top");
                         a = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_top));
-                        displayMessage("Above!");
                     }
                     if(!(left.equalsIgnoreCase("water"))){
                         (friendlyWaters[row][col-1]).setType("left");
                         (friendlyWaters[row][col]).setType("right");
                         l = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_right));
-                        displayMessage("Left!");
                     }
                     if(!(right.equalsIgnoreCase("water"))){
                         (friendlyWaters[row][col+1]).setType("right");
                         (friendlyWaters[row][col]).setType("left");
                         r = true;
                         im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_left));
-                        displayMessage("Right!");
                     }
                     if(b & a){
                         (friendlyWaters[row][col]).setType("middle_v");
@@ -190,73 +178,18 @@ public class P1SetupActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    //v.setBackgroundColor(Color.BLUE);
                     (friendlyWaters[row][col]).setType("water");
                     im.setImageDrawable(ContextCompat.getDrawable(P1SetupActivity.this, R.drawable.ship_water));
+                    numPieces--;
                 }
+
+//                Intent intent = getIntent();
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                finish();
+//                startActivity(intent);
             }
         };
     }
-
-/*
-********************************************************************************
-*** determineFirst - DON"T NEED ANYMORE
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Determines which of the two players will make the first move
-*** Inputs:
-*** n/a
-*** Outputs:
-*** Boolean firstTurn
-********************************************************************************
-*** Date
-*** 11/27/15
-********************************************************************************
-*/
-//    public Boolean determineFirst ()
-//    {
-//        // True, player goes first; False, opponent goes first
-//        Boolean firstTurn = null;
-//
-//
-//        // Generate an int between 0 & 5, compare w/ opponent, larger number goes
-//        // first. Repeat on equal value.
-//        Random randGenerator = new Random ();
-//
-//        // Loop until the firstTurn is determined
-//        while (firstTurn == null)
-//        {
-//            displayMessage("In determineFirst");
-//            int yourRandValue = 3;//randGenerator.nextInt(5);
-//            //TODO: send yourRandValue
-//            //connection.sendInfo(String.valueOf(yourRandValue));
-//
-//
-//
-//            // SEND / RECEIVE # TO / FROM OPPONENT
-//            // PLACEHOLDER FOR VALUE TO BE RECEIVED
-//            //TODO : get theirRandValue
-//            int theirRandValue = 2;
-//            //int theirRandValue = Integer.parseInt(connection.getInfo());
-//
-//            if (yourRandValue > theirRandValue)
-//            {
-//                firstTurn = true;
-//            }
-//            else if (yourRandValue < theirRandValue)
-//            {
-//                firstTurn = false;
-//            }
-//
-//        }
-//        //TODO: Needs to communicate with other phone (via fileTrasferServie?)
-//        //connection.sendInfo(String.valueOf(firstTurn);
-//
-//        return firstTurn;
-//
-//
-//    }
 
 /*
 ********************************************************************************

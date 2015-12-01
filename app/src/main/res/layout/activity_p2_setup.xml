@@ -24,4 +24,14 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/button_readyP2"
         android:id="@+id/shipSetupGridP2"></TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Player 2 Setup"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/button_readyP2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

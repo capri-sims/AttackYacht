@@ -52,8 +52,6 @@ public class P1TurnActivity extends AppCompatActivity
     //static boolean first = true;
     static private Ship[][] enemyWaters  = new Ship[ROW][COL];
     private static boolean firstRun = true; // Check for first run for initialization purposes
-    private ImageView selectedSquare;
-    private Ship selectedShip;
     private int fireCol= 0;
     private int fireRow = 0;
 
@@ -142,8 +140,6 @@ public class P1TurnActivity extends AppCompatActivity
 View.OnClickListener onClick(final ImageView im, final int row, final int col) {
     return new View.OnClickListener() {
         public void onClick(View v) {
-            selectedSquare = (ImageView) v;
-            //selectedShip = enemyWaters[row][col];
             fireRow = row;
             fireCol = col;
             TextView firePos = (TextView) findViewById(R.id.firePosition);
@@ -201,33 +197,33 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** 11/28/15 - CS - updateGrid() added
 ********************************************************************************
 */
-    public void processAttack (int posCol, int posRow) //probably better to use either Ship or ImageView
+    public void processAttack (int posCol, int posRow)
     {
         // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
         // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
         // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
         Boolean attackResults[] = new Boolean[]{true, false};
 
-        //not saying the miss output
+        //not saying the miss output //it was backwards
         if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
-            Toast.makeText(getApplicationContext(), "HIT", Toast.LENGTH_SHORT).show();
+            displayMessage("MISS");
         }
         else{
-            Toast.makeText(getApplicationContext(), "miss", Toast.LENGTH_SHORT).show();
+            displayMessage("HIT");
         }
 
 
         // Check on result of attack, alter enemyWaters if successful
-        if (attackResults[0] == true) {
-            Ship.hit();
-
-            // Display attack was successful
-            displayMessage ("We sunk an enemy ship!");
-        } else {
-            // Display attack was unsuccessful
-            displayMessage ("Oh no! Our attack missed!");
-        }
+//        if (attackResults[0] == true) {
+//            //Ship.hit();
+//
+//            // Display attack was successful
+//            displayMessage ("We sunk an enemy ship!");
+//        } else {
+//            // Display attack was unsuccessful
+//            displayMessage ("Oh no! Our attack missed!");
+//        }
 
         updateGrid();
 
@@ -276,4 +272,6 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         finish();
         startActivity(intent);
     }
+
+
 }
