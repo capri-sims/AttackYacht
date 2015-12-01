@@ -1,5 +1,29 @@
+/*
+********************************************************************************
+*** P2SetupActivity.java
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Player 2 choosed where they wish to place their ships pre-game, which then
+*** carries over to P1TurnActivity & P2TurnActivity
+********************************************************************************
+*** Date:
+*** 11/19/15
+********************************************************************************
+*** Change Log:
+*** 11/19/15 - CS - Created onCreate
+*** 11/23/15 - CS - Created onClick
+*** 11/23/15 - CS - Created displayMessage
+*** 11/23/15 - CS - Created getFriendlyWaters
+*** 11/xx/15 - xx -
+***
+********************************************************************************
+*/
+
+// Project Package
 package group5.attackyacht;
 
+// Imported libraries
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +39,29 @@ import android.widget.Toast;
 
 public class P2SetupActivity extends AppCompatActivity {
 
+    // Class-wide variable
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
     private int pieceLimit = 15;
     static private int numPieces = 0;
 
+/*
+********************************************************************************
+*** onCreate
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Displays the setup screen, gets user input
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/19/15
+********************************************************************************
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +91,7 @@ public class P2SetupActivity extends AppCompatActivity {
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                //TODO: Show dialog box for next player
+                // Begin player 1's first turn
                 Intent intent = new Intent(P2SetupActivity.this, P1TurnActivity.class);
                 startActivity(intent);
             }
@@ -63,7 +104,7 @@ public class P2SetupActivity extends AppCompatActivity {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-***
+*** Adds functional to the selection grid
 *** Inputs:
 *** final ImageView im, final int row, final int col
 *** Outputs:
@@ -155,7 +196,7 @@ public class P2SetupActivity extends AppCompatActivity {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Displays the game screen, initializes enemyWaters, and continues game loop
+*** Displays a message to the player
 *** Inputs:
 *** Bundle savedInstanceState
 *** Outputs:

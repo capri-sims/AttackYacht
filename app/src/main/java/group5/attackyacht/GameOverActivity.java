@@ -34,7 +34,7 @@ public class GameOverActivity extends AppCompatActivity {
 
     // Class-wide variable
 
-    // Holds status of which player won; True, player won; False, play lost
+    // Holds status of which player won
     private static String winner;
 
     /*

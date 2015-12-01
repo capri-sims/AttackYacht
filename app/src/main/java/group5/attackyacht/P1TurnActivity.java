@@ -1,6 +1,6 @@
 /*
 ********************************************************************************
-*** PlayYourTurnActivity.java
+*** P1TurnActivity.java
 *** Group 5
 ********************************************************************************
 *** Purpose:
@@ -9,7 +9,7 @@
 *** informing players of the status of the game.
 ********************************************************************************
 *** Date:
-*** 11/23/15
+*** 11/28/15
 ********************************************************************************
 *** Change Log:
 *** 11/23/15 - CS - Class created and laid out
@@ -19,6 +19,9 @@
 *** 11/24/15 - ZC - Created processAttack
 *** 11/27/15 - CS - Created onClick
 *** 11/27/15 - CS - Created updateGrid
+*** 11/28/15 - #5 - Retooled for local play, all previous changes carried over
+***                 from PlayTheirTurnActivity
+*** 11/28/15 - CS - Created isItOver
 *** 11/xx/15 - xx -
 ***
 ********************************************************************************
@@ -28,7 +31,6 @@
 package group5.attackyacht;
 
 // Imported libraries
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,7 +76,7 @@ public class P1TurnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p1_turn);
 
-        //creates the 2D array
+        // Creates the 2D array
         TableLayout table = (TableLayout) findViewById(R.id.watersP1);
         for(int i = 0; i < ROW; i++) { //Initialize enemy waters
             TableRow row = new TableRow(P1TurnActivity.this);
@@ -93,6 +95,7 @@ public class P1TurnActivity extends AppCompatActivity
 
         //updateGrid();
 
+        // Button to accept grid choice and attack
         Button buttonFire = (Button) findViewById(R.id.button_fireP1);
         buttonFire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -111,7 +114,7 @@ public class P1TurnActivity extends AppCompatActivity
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Displays the game screen, initializes enemyWaters, and continues game loop
+*** Gets location on grid when clicked and gives feedback to user
 *** Inputs:
 *** final ImageView im, final int row, final int col
 *** Outputs:
@@ -121,43 +124,47 @@ public class P1TurnActivity extends AppCompatActivity
 *** 11/27/15
 ********************************************************************************
 */
-View.OnClickListener onClick(final ImageView im, final int row, final int col) {
+    View.OnClickListener onClick(final ImageView im, final int row, final int col) {
     return new View.OnClickListener() {
         public void onClick(View v) {
             fireRow = row;
             fireCol = col;
             TextView firePos = (TextView) findViewById(R.id.firePositionP1);
-            int fc = fireCol;// + 1; //Needed to avoid incrementing fireRow & Col
+
+            // Do not increment fireCol / fireRow directly
+            int fc = fireCol;// + 1;
             int fr = fireRow;// + 1;
-            String text = "Firing at " + fc + ", " + fr; //Needed to avoid crashes
+
+            // Give user feedback of grid selection
+            String text = "Firing at " + fc + ", " + fr;
             firePos.setText(text);
         }
     };
-}
+    }
 
 
-    /*
-    ********************************************************************************
-    *** displayMessage
-    *** Group 5
-    ********************************************************************************
-    *** Purpose:
-    *** Displays the game screen, initializes enemyWaters, and continues game loop
-    *** Inputs:
-    *** Bundle savedInstanceState
-    *** Outputs:
-    *** n/a
-    ********************************************************************************
-    *** Date
-    *** 11/23/15
-    ********************************************************************************
-    */
+/*
+********************************************************************************
+*** displayMessage
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Displays a message on screen
+*** Inputs:
+*** Bundle savedInstanceState
+*** Outputs:
+*** n/a
+********************************************************************************
+*** Date
+*** 11/23/15
+********************************************************************************
+*/
     private void displayMessage(String message){
-
+        // Get context and set duration of message
         Context context = getApplicationContext();
-        //CharSequence text = message;
         int duration = Toast.LENGTH_SHORT;
 
+        // Actually display the message
         Toast toast = Toast.makeText(context, message, duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
@@ -169,28 +176,26 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Takes attack selection from user, sends it to opponent, then alters
-*** enemyWaters or ends the game to reflect the attack
+*** Takes attack selection from user, checks if attack was successful, and if
+*** the game has ended
 *** Inputs:
-*** int attackCoordinates []
+*** int posRow, int posCol
 *** Outputs:
 *** n/a
 ********************************************************************************
 *** Date
-*** 11/25/15
-********************************************************************************
-*** Change Log:
-*** 11/28/15 - CS - Added the messages
-*** 11/28/15 - CS - updateGrid() added
+*** 11/24/15
 ********************************************************************************
 */
     public void processAttack (int posRow,int posCol)
     {
-        // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
-        // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
-        // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
-        //Boolean attackResults[] = new Boolean[]{true, false};
+        /**
+         * WiFi connection would happen here. The player would send their attack coordinates to
+         * their opponent, and their game's processAttack would check for hits / game ending and
+         * that information would be returned to the player.
+         */
 
+        // The attack is checked against the enemyWaters ship layout
         if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
             displayMessage("MISS");
@@ -200,29 +205,15 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
             (enemyWaters[posRow][posCol]).hit();
         }
 
+        // updateGrid ();
 
-        // Check on result of attack, alter enemyWaters if successful
-//        if (attackResults[0] == true) {
-//            //Ship.hit();
-//
-//            // Display attack was successful
-//            displayMessage ("We sunk an enemy ship!");
-//        } else {
-//            // Display attack was unsuccessful
-//            displayMessage ("Oh no! Our attack missed!");
-//        }
-
-        //updateGrid();
-
-        // Check if game is over, call gameOverActivity if it is
-//        if (attackResults[1] == true) {
-//            // Set player as winner
-//            GameOverActivity.setVictory(true);
-//
-//            //get info from connection service
-//        }
+        // Handles end of game
         if(isItOver()){
             GameOverActivity.setWinner("Player 1");
+
+            // TODO: isItOver; GameOverActivity does not begin
+            // Game does not end when all ships are destroyed, but the code manages
+            // to get to this point
             Intent intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
             startActivity(intent);
         }
@@ -244,6 +235,7 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 *** 11/27/15
 ********************************************************************************
 */
+
     private void updateGrid(){ //will this override the onClickListeners???
 
 //        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
@@ -265,18 +257,32 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         startActivity(intent);
     }
 
-    private boolean isItOver(){
+/*
+********************************************************************************
+*** isItOver
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Traverses enemyWaters to check for remaining ships, and signals for the
+*** game to end accordingly
+*** Inputs:
+*** n/a
+*** Outputs:
+*** Boolean false, Boolean true
+********************************************************************************
+*** Date
+*** 11/28/15
+********************************************************************************
+*/
+    private boolean isItOver() {
 
-        for(int i = 0; i < ROW; i++){
-            for(int j = 0; j < COL; j++){
-                if(!(((enemyWaters[i][j]).getType()).equals("water") || ((enemyWaters[i][j]).getType()).equals("destroyed"))){
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                if (!(((enemyWaters[i][j]).getType()).equals("water") || !((enemyWaters[i][j]).getType()).equals("destroyed"))) {
                     return false;
                 }
             }
-
         }
         return true;
     }
-
-
 }

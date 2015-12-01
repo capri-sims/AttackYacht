@@ -1,16 +1,20 @@
 /*
 ********************************************************************************
-*** SetupActivity.java
+*** P1SetupActivity.java
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Players choose where they wish to place their ships pre-game, which then
-*** carries over to PlayYourTurnActivity & PlayTheirTurnActivity
+*** Player 1 chooses where they wish to place their ships pre-game, which then
+*** carries over to P1TurnActivity & P2TurnActivity
 ********************************************************************************
 *** Date:
 *** 11/19/15
 ********************************************************************************
 *** Change Log:
+*** 11/19/15 - CS - Created onCreate
+*** 11/23/15 - CS - Created onClick
+*** 11/23/15 - CS - Created displayMessage
+*** 11/23/15 - CS - Created getFriendlyWaters
 *** 11/xx/15 - xx -
 ***
 ********************************************************************************
@@ -35,6 +39,7 @@ import android.widget.Toast;
 
 public class P1SetupActivity extends AppCompatActivity {
 
+    // Class-wide variable
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] friendlyWaters = new Ship[ROW][COL];
@@ -48,7 +53,7 @@ public class P1SetupActivity extends AppCompatActivity {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-***
+*** Displays the setup screen, gets user input
 *** Inputs:
 *** Bundle savedInstanceState
 *** Outputs:
@@ -87,7 +92,12 @@ public class P1SetupActivity extends AppCompatActivity {
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                //TODO: Show dialog box for next player
+                // Let player 1 know it's player 2's turn to setup
+                Toast nextPlayerToast = Toast.makeText (getApplicationContext (), "Please hand the phone to player 2. No peeking!", Toast.LENGTH_SHORT);
+                nextPlayerToast.setGravity(Gravity.CENTER, 0, 0);
+                nextPlayerToast.show();
+
+                // Begin player 2's setup
                 Intent intent = new Intent(P1SetupActivity.this, P2SetupActivity.class);
                 startActivity(intent);
             }
@@ -100,7 +110,7 @@ public class P1SetupActivity extends AppCompatActivity {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-***
+*** Adds functional to the selection grid
 *** Inputs:
 *** final ImageView im, final int row, final int col
 *** Outputs:
@@ -197,7 +207,7 @@ public class P1SetupActivity extends AppCompatActivity {
 *** Group 5
 ********************************************************************************
 *** Purpose:
-*** Displays the game screen, initializes enemyWaters, and continues game loop
+*** Displays a message to the player
 *** Inputs:
 *** Bundle savedInstanceState
 *** Outputs:
