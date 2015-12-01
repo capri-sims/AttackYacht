@@ -76,7 +76,7 @@ public class MusicService extends Service
         super.onCreate();
 
         // Settings for the music player
-        music = MediaPlayer.create(this, R.raw.machinations);
+        //music = MediaPlayer.create(this, R.raw.machinations); //GIVES ERRORS
         music.setLooping(true);
         music.setVolume(100,100);
     }

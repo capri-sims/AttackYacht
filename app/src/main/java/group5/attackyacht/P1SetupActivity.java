@@ -222,38 +222,4 @@ public class P1SetupActivity extends AppCompatActivity {
         toast.show();
     }
 
-    /*
-********************************************************************************
-*** getFriendlyWaters
-*** Group 5
-********************************************************************************
-*** Purpose:
-*** Returns friendlyWaters
-*** Inputs:
-*** n/a
-*** Outputs:
-*** ship [][] friendlyWaters
-********************************************************************************
-*** Date
-*** 11/23/15
-********************************************************************************
-*/
-    static public Ship[][] getFriendlyWaters() {
-        return friendlyWaters;
-    }
-
-    public void passPhone(){
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(P1SetupActivity.this);
-        builder1.setMessage("Pass the phone!.");
-        builder1.setCancelable(true);
-        builder1.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
-    }
 }
