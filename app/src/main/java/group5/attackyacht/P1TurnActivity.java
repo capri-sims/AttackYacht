@@ -101,12 +101,31 @@ public class P1TurnActivity extends AppCompatActivity
             public void onClick(View v) {
 
                 processAttack(fireRow, fireCol);
-                Intent intent = new Intent(P1TurnActivity.this, P2TurnActivity.class);
-                startActivity(intent);
 
+                Intent intent;
+                if(isItOver()){
+                    GameOverActivity.setWinner("Player 1");
+                    intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
+                }
+                else {
+                    //TODO: Add dialog box
+                    intent = new Intent(P1TurnActivity.this, P2TurnActivity.class);
+                }
+                startActivity(intent);
+        }});
+
+        Button buttonView = (Button) findViewById(R.id.button_viewP1);
+        buttonView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                FriendlyWatersActivity.setP1(true);
+                Intent intent = new Intent(P1TurnActivity.this, FriendlyWatersActivity.class);
+                startActivity(intent);
             }
         });
     }
+
+
 
 /*
 ********************************************************************************
@@ -208,15 +227,15 @@ public class P1TurnActivity extends AppCompatActivity
         // updateGrid ();
 
         // Handles end of game
-        if(isItOver()){
-            GameOverActivity.setWinner("Player 1");
-
-            // TODO: isItOver; GameOverActivity does not begin
-            // Game does not end when all ships are destroyed, but the code manages
-            // to get to this point
-            Intent intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
-            startActivity(intent);
-        }
+//        if(isItOver()){
+//            GameOverActivity.setWinner("Player 1");
+//
+//            // TODO: isItOver; GameOverActivity does not begin
+//            // Game does not end when all ships are destroyed, but the code manages
+//            // to get to this point
+//            Intent intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
+//            startActivity(intent);
+//        }
     }
 
 /*
@@ -251,10 +270,10 @@ public class P1TurnActivity extends AppCompatActivity
 //            table.addView(row);
 //        }
 
-        Intent intent = getIntent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        startActivity(intent);
+//        Intent intent = getIntent();
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//        finish();
+//        startActivity(intent);
     }
 
 /*
@@ -278,11 +297,15 @@ public class P1TurnActivity extends AppCompatActivity
 
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if (!(((enemyWaters[i][j]).getType()).equals("water") || !((enemyWaters[i][j]).getType()).equals("destroyed"))) {
+                if (!(((enemyWaters[i][j]).getType()).equals("water") || ((enemyWaters[i][j]).getType()).equals("destroyed"))) {
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    static public Ship[][] getEnemyWaters() {
+        return enemyWaters;
     }
 }

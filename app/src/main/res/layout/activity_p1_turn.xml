@@ -41,4 +41,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View"
+        android:id="@+id/button_viewP1"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/firePositionP1"
+        android:layout_alignEnd="@+id/firePositionP1"
+        android:textSize="10dp" />
+
 </RelativeLayout>

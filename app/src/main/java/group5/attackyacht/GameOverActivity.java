@@ -100,7 +100,7 @@ public class GameOverActivity extends AppCompatActivity {
         });
 
         // button to exit
-        Button buttonExit = (Button)findViewById(R.id.button_exit);
+        Button buttonExit = (Button)findViewById(R.id.button_exit); //TODO: Fix this
         buttonExit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();

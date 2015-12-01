@@ -50,7 +50,7 @@ public class P2TurnActivity extends AppCompatActivity
     // Class-wide variables
     static private int ROW = 7;
     static private int COL = 12;
-    static private Ship[][] enemyWaters = P1SetupActivity.getFriendlyWaters();
+    static private Ship[][] enemyWaters = P1SetupActivity.getFriendlyWaters(); //Copy array instead??
     private int fireCol= 0;
     private int fireRow = 0;
 
@@ -100,7 +100,26 @@ public class P2TurnActivity extends AppCompatActivity
             public void onClick(View v) {
 
                 processAttack(fireRow, fireCol);
-                Intent intent = new Intent(P2TurnActivity.this, P1TurnActivity.class);
+
+                Intent intent;
+                if(isItOver()){
+                    GameOverActivity.setWinner("Player 2");
+                    intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
+                }
+                else {
+                    //TODO: Add dialog box
+                    intent = new Intent(P2TurnActivity.this, P1TurnActivity.class);
+                }
+                startActivity(intent);
+            }
+        });
+
+        Button buttonView = (Button) findViewById(R.id.button_viewP2);
+        buttonView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                FriendlyWatersActivity.setP1(false);
+                Intent intent = new Intent(P2TurnActivity.this, FriendlyWatersActivity.class);
                 startActivity(intent);
             }
         });
@@ -127,7 +146,7 @@ public class P2TurnActivity extends AppCompatActivity
             public void onClick(View v) {
                 fireRow = row;
                 fireCol = col;
-                TextView firePos = (TextView) findViewById(R.id.firePositionP1);
+                TextView firePos = (TextView) findViewById(R.id.firePositionP2);
 
                 // Do not increment fireCol / fireRow directly
                 int fc = fireCol;// + 1;
@@ -206,15 +225,15 @@ public class P2TurnActivity extends AppCompatActivity
         // updateGrid ();
 
         // Handles end of game
-        if(isItOver()){
-            GameOverActivity.setWinner("Player 2");
-
-            // TODO: isItOver; GameOverActivity does not begin
-            // Game does not end when all ships are destroyed, but the code manages
-            // to get to this point
-            Intent intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
-            startActivity(intent);
-        }
+//        if(isItOver()){
+//            GameOverActivity.setWinner("Player 2");
+//
+//            // TODO: isItOver; GameOverActivity does not begin
+//            // Game does not end when all ships are destroyed, but the code manages
+//            // to get to this point
+//            Intent intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
+//            startActivity(intent);
+//        }
     }
 
     /*
@@ -275,12 +294,16 @@ public class P2TurnActivity extends AppCompatActivity
 
         for(int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
-                if(!(((enemyWaters[i][j]).getType()).equals("water") || !((enemyWaters[i][j]).getType()).equals("destroyed"))){
+                if(!(((enemyWaters[i][j]).getType()).equals("water") || ((enemyWaters[i][j]).getType()).equals("destroyed"))){
                     return false;
                 }
             }
 
         }
         return true;
+    }
+
+    static public Ship[][] getEnemyWaters() {
+        return enemyWaters;
     }
 }
