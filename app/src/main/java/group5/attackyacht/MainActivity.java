@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //NOT WORKING
-//        Intent music = new Intent(this, MusicService.class);
-//        startService(music);
+        Intent music = new Intent(this, MusicService.class);
+        startService(music);
 
         //BUTTONS//
         Button buttonLocal = (Button) findViewById(R.id.button_local);
