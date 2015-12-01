@@ -51,8 +51,11 @@ public class P1TurnActivity extends AppCompatActivity
     static private int ROW = 7;
     static private int COL = 12;
     static private Ship[][] enemyWaters = P2SetupActivity.getFriendlyWaters();
+    static private Ship[][] friendlyWaters = P1SetupActivity.getFriendlyWaters();
     private int fireCol= 0;
     private int fireRow = 0;
+    int numP2Ship = 0;
+    int numP1Ship = 0;
 
 
 /*
@@ -73,6 +76,7 @@ public class P1TurnActivity extends AppCompatActivity
 */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p1_turn);
 
@@ -92,6 +96,41 @@ public class P1TurnActivity extends AppCompatActivity
             }
             table.addView(row);
         }
+
+        for(int q = 0; q < ROW; q++)
+        {
+            for(int g = 0; g < COL; g++)
+            {
+                if(((enemyWaters[q][g]).getType()).equals("water")||((enemyWaters[q][g]).getType()).equals("destroyed")){
+                }
+                else
+                {
+                    numP2Ship++;
+                }
+                if(((friendlyWaters[q][g]).getType()).equals("water")||((friendlyWaters[q][g]).getType()).equals("destroyed")){
+                }
+                else
+                {
+                    numP1Ship++;
+                }
+
+            }
+        }
+
+        if(numP1Ship == 0)
+        {
+            GameOverActivity.setWinner("Player 2");
+            Intent intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
+            startActivity(intent);
+        }
+
+        String numText = "# of Enemy Ships: " + numP2Ship;
+        TextView numP2Ships = (TextView) findViewById(R.id.p2Ships);
+        numP2Ships.setText(numText);
+
+        String mynumText = "# of Remaining Ships: " + numP1Ship;
+        TextView numP1Ships = (TextView) findViewById(R.id.myP1Ships);
+        numP1Ships.setText(mynumText);
 
         //updateGrid();
 

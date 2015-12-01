@@ -46,4 +46,22 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/p1Ships"
+        android:layout_alignTop="@+id/button_fireP2"
+        android:layout_toLeftOf="@+id/firePositionP2"
+        android:layout_toStartOf="@+id/firePositionP2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/myP2Ships"
+        android:layout_alignTop="@+id/button_fireP2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
