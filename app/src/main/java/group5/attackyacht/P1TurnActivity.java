@@ -208,12 +208,13 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
         Boolean attackResults[] = new Boolean[]{true, false};
 
-        if((enemyWaters[posRow][posCol]).getType() != "water" || (enemyWaters[posRow][posCol]).getType() != "destroyed")
+        //not saying the miss output
+        if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
-            Toast.makeText(getApplicationContext(), (enemyWaters[posRow][posCol]).getType(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "HIT", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(getApplicationContext(), "GG FGT", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "miss", Toast.LENGTH_SHORT).show();
         }
 
 
