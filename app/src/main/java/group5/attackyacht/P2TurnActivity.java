@@ -31,7 +31,9 @@
 package group5.attackyacht;
 
 // Imported libraries
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -116,19 +118,12 @@ public class P2TurnActivity extends AppCompatActivity
             }
         }
 
-        /*if(numP2Ship == 0)
-        {
-            GameOverActivity.setWinner("Player 1");
-            Intent intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
-            startActivity(intent);
-        }*/
-
         String numText = "# of Enemy Ships: " + numP1Ship;
-        TextView numP1Ships = (TextView) findViewById(R.id.p1Ships);
-        numP1Ships.setText(numText);
+        TextView numP2Ships = (TextView) findViewById(R.id.p1Ships);
+        numP2Ships.setText(numText);
         String mynumText = "# of Remaining Ships: " + numP2Ship;
-        TextView numP2Ships = (TextView) findViewById(R.id.myP2Ships);
-        numP2Ships.setText(mynumText);
+        TextView numP1Ships = (TextView) findViewById(R.id.myP2Ships);
+        numP1Ships.setText(mynumText);
 
         // Button to accept grid choice and attack
         Button buttonFire = (Button) findViewById(R.id.button_fireP2);
@@ -143,7 +138,7 @@ public class P2TurnActivity extends AppCompatActivity
                     intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
                 }
                 else {
-                    //TODO: Add dialog box
+                    displayMessage("Pass the phone!");
                     intent = new Intent(P2TurnActivity.this, P1TurnActivity.class);
                 }
                 startActivity(intent);
@@ -215,7 +210,7 @@ public class P2TurnActivity extends AppCompatActivity
     private void displayMessage(String message){
         // Get context and set duration of message
         Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
+        int duration = Toast.LENGTH_LONG;
 
         // Actually display the message
         Toast toast = Toast.makeText(context, message, duration);
@@ -242,12 +237,6 @@ public class P2TurnActivity extends AppCompatActivity
 */
     public void processAttack (int posRow,int posCol)
     {
-        /**
-         * WiFi connection would happen here. The player would send their attack coordinates to
-         * their opponent, and their game's processAttack would check for hits / game ending and
-         * that information would be returned to the player.
-         */
-
         // The attack is checked against the enemyWaters ship layout
         if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
@@ -258,56 +247,8 @@ public class P2TurnActivity extends AppCompatActivity
             (enemyWaters[posRow][posCol]).hit();
         }
 
-        // updateGrid ();
-
-        // Handles end of game
-//        if(isItOver()){
-//            GameOverActivity.setWinner("Player 2");
-//
-//            // TODO: isItOver; GameOverActivity does not begin
-//            // Game does not end when all ships are destroyed, but the code manages
-//            // to get to this point
-//            Intent intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
-//            startActivity(intent);
-//        }
     }
 
-    /*
-    ********************************************************************************
-    *** updateGrid
-    *** Group 5
-    ********************************************************************************
-    *** Purpose:
-    *** Updates the graphics displayed within the on screen grid
-    *** Inputs:
-    *** n/a
-    *** Outputs:
-    *** n/a
-    ********************************************************************************
-    *** Date
-    *** 11/27/15
-    ********************************************************************************
-    */
-    private void updateGrid(){ //will this override the onClickListeners???
-
-//        TableLayout table = (TableLayout) findViewById(R.id.enemyWaters);
-//        for (int i = 0; i < ROW; i++){
-//            TableRow row = new TableRow(this);
-//            for (int j = 0; j < COL; j++){
-//                ImageView image = new ImageView (this);
-//                int imageID = getResources().getIdentifier(("ship_" + (enemyWaters[i][j]).getType()), "drawable", getPackageName());
-//                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
-//                image.setOnClickListener(onClick(image, i, j));
-//                row.addView(image, 100, 100);
-//            }
-//            table.addView(row);
-//        }
-
-//        Intent intent = getIntent();
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//        finish();
-//        startActivity(intent);
-    }
 
 /*
 ********************************************************************************
