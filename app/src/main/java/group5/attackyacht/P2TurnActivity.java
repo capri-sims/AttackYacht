@@ -52,7 +52,6 @@ public class P2TurnActivity extends AppCompatActivity
     static private int COL = 12;
     static private Ship[][] enemyWaters = P1SetupActivity.getFriendlyWaters();
     static private Ship[][] friendlyWaters = P2SetupActivity.getFriendlyWaters();
-    static private Ship[][] enemyWaters = P1SetupActivity.getFriendlyWaters(); //Copy array instead??
     private int fireCol= 0;
     private int fireRow = 0;
     int numP1Ship = 0;

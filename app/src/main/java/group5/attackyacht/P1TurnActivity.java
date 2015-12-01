@@ -97,22 +97,18 @@ public class P1TurnActivity extends AppCompatActivity
             table.addView(row);
         }
 
-        for(int q = 0; q < ROW; q++)
-        {
-            for(int g = 0; g < COL; g++)
-            {
-                if(((enemyWaters[q][g]).getType()).equals("water")||((enemyWaters[q][g]).getType()).equals("destroyed")){
-                }
-                else
-                {
+        for(int q = 0; q < ROW; q++) {
+            for (int g = 0; g < COL; g++) {
+                if (((enemyWaters[q][g]).getType()).equals("water") || ((enemyWaters[q][g]).getType()).equals("destroyed")) {
+                } else {
                     numP2Ship++;
                 }
-                if(((friendlyWaters[q][g]).getType()).equals("water")||((friendlyWaters[q][g]).getType()).equals("destroyed")){
-                }
-                else
-                {
+                if (((friendlyWaters[q][g]).getType()).equals("water") || ((friendlyWaters[q][g]).getType()).equals("destroyed")) {
+                } else {
                     numP1Ship++;
                 }
+            }
+        }
 
         // Button to accept grid choice and attack
         Button buttonFire = (Button) findViewById(R.id.button_fireP1);
