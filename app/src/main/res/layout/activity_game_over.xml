@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="Again?"
         android:id="@+id/button_again"
-        android:layout_alignTop="@+id/button_menu"
+        android:layout_alignBaseline="@+id/button_menu"
+        android:layout_alignBottom="@+id/button_menu"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -35,4 +36,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="70dp"
         android:layout_marginEnd="71dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Somebody Won!"
+        android:id="@+id/text_winner"
+        android:textSize="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

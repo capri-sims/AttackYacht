@@ -28,13 +28,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameOverActivity extends AppCompatActivity {
 
     // Class-wide variable
 
     // Holds status of which player won; True, player won; False, play lost
-    private static Boolean victory = null;
+    private static String winner;
 
     /*
 ********************************************************************************
@@ -52,8 +53,8 @@ public class GameOverActivity extends AppCompatActivity {
 *** 11/25/15
 ********************************************************************************
 */
-    public static void setVictory(Boolean newVictory) {
-        victory = newVictory;
+    public static void setWinner(String w) {
+        winner = w;
     }
 
     /*
@@ -76,6 +77,9 @@ public class GameOverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+
+        TextView text = (TextView)findViewById(R.id.text_winner);
+        text.setText(winner + " wins!");
 
         // button to return to main menu.
         Button buttonMenu = (Button)findViewById(R.id.button_menu);

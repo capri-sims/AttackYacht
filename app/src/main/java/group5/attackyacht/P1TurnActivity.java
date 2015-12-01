@@ -46,12 +46,9 @@ import android.widget.Toast;
 public class P1TurnActivity extends AppCompatActivity
 {
     // Class-wide variables
-
     static private int ROW = 7;
     static private int COL = 12;
-    //static boolean first = true;
-    static private Ship[][] enemyWaters  = new Ship[ROW][COL];
-    private static boolean firstRun = true; // Check for first run for initialization purposes
+    static private Ship[][] enemyWaters = P2SetupActivity.getFriendlyWaters();
     private int fireCol= 0;
     private int fireRow = 0;
 
@@ -77,24 +74,21 @@ public class P1TurnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p1_turn);
 
-        if(firstRun){
-
-            //creates the 2D array
-            TableLayout table = (TableLayout) findViewById(R.id.watersP1);
-            for(int i = 0; i < ROW; i++){ //Initialize enemy waters //will this rewrite everytime???
-                TableRow row = new TableRow(P1TurnActivity.this);
-                for(int j = 0; j < COL; j++){
-
-                    ImageView image = new ImageView (this);
-                    enemyWaters[i][j] = new Ship("water", i, j);
-                    image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
-                    row.addView(image, 100, 100);
-                    image.setOnClickListener(onClick(image, i, j));
-
-                }
-                table.addView(row);
+        //creates the 2D array
+        TableLayout table = (TableLayout) findViewById(R.id.watersP1);
+        for(int i = 0; i < ROW; i++) { //Initialize enemy waters
+            TableRow row = new TableRow(P1TurnActivity.this);
+            for (int j = 0; j < COL; j++) {
+                ImageView image = new ImageView(this);
+                //------FOR DEBUGGING-----//
+//                int imageID;
+//                imageID = getResources().getIdentifier(("ship_" + (enemyWaters[i][j]).getType()), "drawable", getPackageName());
+//                image.setImageDrawable(ContextCompat.getDrawable(this, imageID));
+                image.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ship_water));
+                row.addView(image, 100, 100);
+                image.setOnClickListener(onClick(image, i, j));
             }
-            firstRun = false;
+            table.addView(row);
         }
 
         //updateGrid();
@@ -103,16 +97,6 @@ public class P1TurnActivity extends AppCompatActivity
         buttonFire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                // TODO: onClick; The following comments on implementation
-                //send selectedSquare to other phone (via FileTransferService?)
-                //get response
-                //display message
-                //update enemyWaters
-                //show updated array
-                
-                // processAttack should handle sending data to the other phone, getting the
-                // response, displaying the message, and updating enemyWaters, but it'd like the
-                // row / col data from selectedSquare to do so
                 processAttack(fireRow, fireCol);
                 Intent intent = new Intent(P1TurnActivity.this, P2TurnActivity.class);
                 startActivity(intent);
@@ -142,8 +126,11 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         public void onClick(View v) {
             fireRow = row;
             fireCol = col;
-            TextView firePos = (TextView) findViewById(R.id.firePosition);
-            firePos.setText("Firing at " + (fireCol+1) + ", " + (fireRow+1));
+            TextView firePos = (TextView) findViewById(R.id.firePositionP1);
+            int fc = fireCol;// + 1; //Needed to avoid incrementing fireRow & Col
+            int fr = fireRow;// + 1;
+            String text = "Firing at " + fc + ", " + fr; //Needed to avoid crashes
+            firePos.setText(text);
         }
     };
 }
@@ -202,15 +189,17 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         // TODO: processAttack; SEND attackCoordinates[] TO OPPONENT
         // TODO: processAttack; RECEIVE attackResults[] FROM OPPONENT
         // TODO: processAttack; OVERWRITE PLACEHOLDER W/ attackResults[] FROM OPPONENT
-        Boolean attackResults[] = new Boolean[]{true, false};
+        //Boolean attackResults[] = new Boolean[]{true, false};
 
         //not saying the miss output //it was backwards
+        //TODO: ERROR IS HERE - ARRAY OUT OF BOUNDS
         if(((enemyWaters[posRow][posCol]).getType()).equals("water")  || ((enemyWaters[posRow][posCol]).getType()).equals("destroyed"))
         {
             displayMessage("MISS");
         }
         else{
             displayMessage("HIT");
+            (enemyWaters[posRow][posCol]).hit();
         }
 
 
@@ -225,14 +214,19 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
 //            displayMessage ("Oh no! Our attack missed!");
 //        }
 
-        updateGrid();
+        //updateGrid();
 
         // Check if game is over, call gameOverActivity if it is
-        if (attackResults[1] == true) {
-            // Set player as winner
-            GameOverActivity.setVictory(true);
-
-            //get info from connection service
+//        if (attackResults[1] == true) {
+//            // Set player as winner
+//            GameOverActivity.setVictory(true);
+//
+//            //get info from connection service
+//        }
+        if(isItOver()){
+            GameOverActivity.setWinner("Player 1");
+            Intent intent = new Intent(P1TurnActivity.this, GameOverActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -271,6 +265,19 @@ View.OnClickListener onClick(final ImageView im, final int row, final int col) {
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         finish();
         startActivity(intent);
+    }
+
+    private boolean isItOver(){
+
+        for(int i = 0; i < ROW; i++){
+            for(int j = 0; j < COL; j++){
+                if(!(((enemyWaters[i][j]).getType()).equals("water") || ((enemyWaters[i][j]).getType()).equals("destroyed"))){
+                    return false;
+                }
+            }
+
+        }
+        return true;
     }
 
 
