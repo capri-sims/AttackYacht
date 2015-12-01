@@ -207,11 +207,11 @@ public class P2SetupActivity extends AppCompatActivity {
 ********************************************************************************
 */
     private void displayMessage(String message){
-
+        // Get context and set duration of message
         Context context = getApplicationContext();
-        //CharSequence text = message;
         int duration = Toast.LENGTH_SHORT;
 
+        // Actually display the message
         Toast toast = Toast.makeText(context, message, duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
@@ -236,6 +236,4 @@ public class P2SetupActivity extends AppCompatActivity {
     static public Ship[][] getFriendlyWaters() {
         return friendlyWaters;
     }
-
-
 }

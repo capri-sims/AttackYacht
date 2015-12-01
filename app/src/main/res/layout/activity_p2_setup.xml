@@ -31,7 +31,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Player 2 Setup"
         android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/button_readyP2"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 </RelativeLayout>

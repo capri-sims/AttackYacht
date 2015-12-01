@@ -50,9 +50,13 @@ public class P2TurnActivity extends AppCompatActivity
     // Class-wide variables
     static private int ROW = 7;
     static private int COL = 12;
+    static private Ship[][] enemyWaters = P1SetupActivity.getFriendlyWaters();
+    static private Ship[][] friendlyWaters = P2SetupActivity.getFriendlyWaters();
     static private Ship[][] enemyWaters = P1SetupActivity.getFriendlyWaters(); //Copy array instead??
     private int fireCol= 0;
     private int fireRow = 0;
+    int numP1Ship = 0;
+    int numP2Ship = 0;
 
 /*
 ********************************************************************************
@@ -92,7 +96,40 @@ public class P2TurnActivity extends AppCompatActivity
             table.addView(row);
         }
 
-        //updateGrid();
+        for(int q = 0; q < ROW; q++)
+        {
+            for(int g = 0; g < COL; g++)
+            {
+                if(((enemyWaters[q][g]).getType()).equals("water")||((enemyWaters[q][g]).getType()).equals("destroyed")){
+
+                }
+                else
+                {
+                    numP1Ship++;
+                }
+
+                if(((friendlyWaters[q][g]).getType()).equals("water")||((friendlyWaters[q][g]).getType()).equals("destroyed")){
+                }
+                else
+                {
+                    numP2Ship++;
+                }
+            }
+        }
+
+        /*if(numP2Ship == 0)
+        {
+            GameOverActivity.setWinner("Player 1");
+            Intent intent = new Intent(P2TurnActivity.this, GameOverActivity.class);
+            startActivity(intent);
+        }*/
+
+        String numText = "# of Enemy Ships: " + numP1Ship;
+        TextView numP1Ships = (TextView) findViewById(R.id.p1Ships);
+        numP1Ships.setText(numText);
+        String mynumText = "# of Remaining Ships: " + numP2Ship;
+        TextView numP2Ships = (TextView) findViewById(R.id.myP2Ships);
+        numP2Ships.setText(mynumText);
 
         // Button to accept grid choice and attack
         Button buttonFire = (Button) findViewById(R.id.button_fireP2);
