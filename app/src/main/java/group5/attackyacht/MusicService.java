@@ -7,9 +7,13 @@
 *** Plays music throughout the program
 ********************************************************************************
 *** Date:
-*** 11/19/15
+*** 12/01/15
 ********************************************************************************
 *** Change Log:
+*** 12/01/15 - ZC - Created onBind
+*** 12/01/15 - ZC - Created onCreate
+*** 12/01/15 - ZC - Created onStartCommand
+*** 12/01/15 - ZC - Created onDestroy
 *** 11/xx/15 - xx -
 ***
 ********************************************************************************
@@ -18,74 +22,107 @@
 // Project Package
 package group5.attackyacht;
 
-/*
+// Imported Libraries
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Environment;
 import android.os.IBinder;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
-import java.io.IOException;
-*/
+public class MusicService extends Service
+{
+    // Musicplayer object for use
+    MediaPlayer music;
 
-public class MusicService { //extends Service {
-    public MusicService() {
+    /*
+    ********************************************************************************
+    *** onBind
+    *** Group 5
+    ********************************************************************************
+    *** Purpose:
+    *** Returns null when the activity switchs, binding the music player
+    *** Inputs:
+    *** Intent activitySwitchBind
+    *** Outputs:
+    *** null
+    ********************************************************************************
+    *** Date
+    *** 12/01/15
+    ********************************************************************************
+    */
+    public IBinder onBind (Intent activitySwitchBind)
+    {
+        return null;
     }
 
-//    private static final String TAG = null;
-//    MediaPlayer player;
-//
-//    public IBinder onBind(Intent arg0) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void onCreate() {
-//        super.onCreate();
-//
-//        player = MediaPlayer.create(this, R.raw.bmusic);
-//        player.setLooping(true); // Set looping
-//        player.setVolume(100,100);
-//
-//    }
-//    public int onStartCommand(Intent intent, int flags, int startId) {
-//
-//        player.start();
-//
-//        return 1;
-//    }
-//
-//    public void onStart(Intent intent, int startId) {
-//        // TODO
-//
-//
-//    }
-//
-//    public IBinder onUnBind(Intent arg0) {
-//        // TODO Auto-generated method stub
-//
-//        return null;
-//    }
-//
-//    public void onStop() {
-//
-//    }
-//
-//    public void onPause() {
-//
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        player.stop();
-//        player.release();
-//    }
-//
-//    @Override
-//    public void onLowMemory() {
-//
-//    }
+    /*
+    ********************************************************************************
+    *** onCreate
+    *** Group 5
+    ********************************************************************************
+    *** Purpose:
+    *** Handles the settings of for the music player
+    *** Inputs:
+    *** n/a
+    *** Outputs:
+    *** n/a
+    ********************************************************************************
+    *** Date
+    *** 12/01/15
+    ********************************************************************************
+    */
+    @Override
+    public void onCreate ()
+    {
+        super.onCreate();
+
+        // Settings for the music player
+        music = MediaPlayer.create(this, R.raw.bmusic);
+        music.setLooping(true);
+        music.setVolume(100,100);
+    }
+
+    /*
+********************************************************************************
+*** onStartCommand
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Starts the music
+*** Inputs:
+*** Intent intent, int flags, int startId
+*** Outputs:
+*** int 1
+********************************************************************************
+*** Date
+*** 12/01/15
+********************************************************************************
+*/
+    public int onStartCommand (Intent intent, int flags, int startId)
+    {
+        music.start();
+        return 1;
+    }
+
+    /*
+    ********************************************************************************
+    *** onDestroy
+    *** Group 5
+    ********************************************************************************
+    *** Purpose:
+    *** Handles the settings of for the music player
+    *** Inputs:
+    *** n/a
+    *** Outputs:
+    *** n/a
+    ********************************************************************************
+    *** Date
+    *** 12/01/15
+    ********************************************************************************
+    */
+    @Override
+    public void onDestroy()
+    {
+        music.stop();
+        music.release();
+    }
 }
