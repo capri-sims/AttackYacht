@@ -24,7 +24,9 @@
 package group5.attackyacht;
 
 // Imported libraries
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -92,10 +94,7 @@ public class P1SetupActivity extends AppCompatActivity {
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                // Let player 1 know it's player 2's turn to setup
-                Toast nextPlayerToast = Toast.makeText (getApplicationContext (), "Please hand the phone to player 2. No peeking!", Toast.LENGTH_SHORT);
-                nextPlayerToast.setGravity(Gravity.CENTER, 0, 0);
-                nextPlayerToast.show();
+                displayMessage("Pass the phone!");
 
                 // Begin player 2's setup
                 Intent intent = new Intent(P1SetupActivity.this, P2SetupActivity.class);
@@ -215,7 +214,7 @@ public class P1SetupActivity extends AppCompatActivity {
     private void displayMessage(String message){
         // Get context and set duration of message
         Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
+        int duration = Toast.LENGTH_LONG;
 
         // Actually display the message
         Toast toast = Toast.makeText(context, message, duration);
@@ -241,5 +240,20 @@ public class P1SetupActivity extends AppCompatActivity {
 */
     static public Ship[][] getFriendlyWaters() {
         return friendlyWaters;
+    }
+
+    public void passPhone(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(P1SetupActivity.this);
+        builder1.setMessage("Pass the phone!.");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }

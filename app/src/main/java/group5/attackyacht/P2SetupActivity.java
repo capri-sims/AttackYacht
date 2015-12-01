@@ -24,7 +24,9 @@
 package group5.attackyacht;
 
 // Imported libraries
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -90,6 +92,8 @@ public class P2SetupActivity extends AppCompatActivity {
         Button buttonReady = (Button) findViewById(R.id.button_readyP2);
         buttonReady.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                displayMessage("Pass the phone!");
 
                 // Begin player 1's first turn
                 Intent intent = new Intent(P2SetupActivity.this, P1TurnActivity.class);
@@ -236,4 +240,5 @@ public class P2SetupActivity extends AppCompatActivity {
     static public Ship[][] getFriendlyWaters() {
         return friendlyWaters;
     }
+
 }
