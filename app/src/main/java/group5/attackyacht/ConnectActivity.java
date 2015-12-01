@@ -86,7 +86,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View v) {
                 //give bluetooth the selected device
                 //if successful
-
                 Intent intent = new Intent(ConnectActivity.this, P1SetupActivity.class);
                 startActivity(intent);
                 //else... try again
@@ -124,12 +123,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         super.onResume();
         registerReceiver(mReceiver, mIntentFilter);
     }
-
-//    @Override //NO MENU
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
 
     @Override
     protected void onPause() {
