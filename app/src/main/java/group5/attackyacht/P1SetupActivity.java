@@ -222,4 +222,24 @@ public class P1SetupActivity extends AppCompatActivity {
         toast.show();
     }
 
+    /*
+********************************************************************************
+*** getFriendlyWaters
+*** Group 5
+********************************************************************************
+*** Purpose:
+*** Returns friendlyWaters
+*** Inputs:
+*** n/a
+*** Outputs:
+*** ship [][] friendlyWaters
+********************************************************************************
+*** Date
+*** 11/23/15
+********************************************************************************
+*/
+    static public Ship[][] getFriendlyWaters() {
+        return friendlyWaters;
+    }
+
 }
